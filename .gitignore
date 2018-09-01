@@ -1,7 +1,5 @@
-.idea
-out
-*.iml
-log
-
-
-
+.IDEA
+*.IML
+OUT
+LOG
+/OUTPUT/
