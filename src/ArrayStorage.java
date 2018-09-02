@@ -34,6 +34,7 @@ public class ArrayStorage {
         for (int i = 0; i < storageSize; i++) {
             if (uuid.equals(storage[i].uuid)) {
 
+                //Плохое решение.--------------------------------------------------------
                 Resume[] arrStart = Arrays.copyOfRange(storage, 0, i);
                 Resume[] arrEnd = Arrays.copyOfRange(storage, i + 1, storage.length);
 
@@ -43,10 +44,11 @@ public class ArrayStorage {
                 System.arraycopy(arrEnd, 0, arrResult, arrStart.length, arrEnd.length);
 
                 storage = arrResult;
+                //---------------------------------------------------------------------------
 
-//                  Это решения лучше.
-//                Resume[] tmp = storage;
-//                storage = (Resume[]) ArrayUtils.addAll(ArrayUtils.remove(tmp, i), new Resume[1]);
+                //Это решения лучше.
+                //Resume[] tmp = storage;
+                //storage = (Resume[]) ArrayUtils.addAll(ArrayUtils.remove(tmp, i), new Resume[1]);
 
                 storageSize--;
                 return;
