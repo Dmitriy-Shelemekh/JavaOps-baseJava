@@ -7,15 +7,18 @@ import java.util.Arrays;
  */
 public class ArrayStorage {
     private static final int RESUME_LIMIT = 10000;
+    private static int storageSize = 0;
     private Resume[] storage = new Resume[RESUME_LIMIT];
 
     void clear() {
         Arrays.fill(storage, null);
+        storageSize = 0;
     }
 
     void save(Resume r) {
         if (get(r.uuid) == null && size() < RESUME_LIMIT) {
             storage[size()] = r;
+            storageSize++;
         }
     }
 
@@ -34,6 +37,7 @@ public class ArrayStorage {
             if (uuid.equals(storage[i].uuid)) {
                 Resume[] tmp = storage;
                 storage = (Resume[]) ArrayUtils.addAll(ArrayUtils.remove(tmp, i), new Resume[1]);
+                storageSize--;
                 return;
             }
         }
@@ -47,14 +51,6 @@ public class ArrayStorage {
     }
 
     int size() {
-        int count = 0;
-
-        for (int i = 0; i < RESUME_LIMIT; i++) {
-            if (storage[i] != null) {
-                count++;
-            }
-        }
-
-        return count;
+        return storageSize;
     }
 }
