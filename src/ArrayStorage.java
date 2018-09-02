@@ -14,10 +14,11 @@ public class ArrayStorage {
     }
 
     void save(Resume r) {
-        if (get(r.uuid) == null && storageSize < RESUME_LIMIT) {
+        //Осторожно ArrayIndexOutOfBoundsException!
+//        if (get(r.uuid) == null && storageSize < RESUME_LIMIT) {
             storage[storageSize] = r;
             storageSize++;
-        }
+//        }
     }
 
     Resume get(String uuid) {
