@@ -4,8 +4,8 @@ import java.util.Arrays;
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    private int arrMaxSize = 10000;
-    private Resume[] storage = new Resume[arrMaxSize];
+    private static final int RESUME_LIMIT = 10000;
+    private Resume[] storage = new Resume[RESUME_LIMIT];
 
     private Resume[] sort(Resume[] resumes) {
         for (int i = 0; i < resumes.length - 1; i++) {
@@ -23,7 +23,7 @@ public class ArrayStorage {
     }
 
     void save(Resume r) {
-        if (get(r.uuid) == null && size() < arrMaxSize) {
+        if (get(r.uuid) == null && size() < RESUME_LIMIT) {
             storage[size()] = r;
         }
     }
@@ -57,7 +57,7 @@ public class ArrayStorage {
     int size() {
         int count = 0;
 
-        for (int i = 0; i < arrMaxSize; i++) {
+        for (int i = 0; i < RESUME_LIMIT; i++) {
             if (storage[i] != null) {
                 count++;
             }
