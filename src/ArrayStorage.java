@@ -1,3 +1,5 @@
+import org.apache.commons.lang.ArrayUtils;
+
 import java.util.Arrays;
 
 /**
@@ -6,17 +8,6 @@ import java.util.Arrays;
 public class ArrayStorage {
     private static final int RESUME_LIMIT = 10000;
     private Resume[] storage = new Resume[RESUME_LIMIT];
-
-    private Resume[] sort(Resume[] resumes) {
-        for (int i = 0; i < resumes.length - 1; i++) {
-            if (resumes[i] == null) {
-                Resume tmp = resumes[i];
-                resumes[i] = resumes[i + 1];
-                resumes[i + 1] = tmp;
-            }
-        }
-        return resumes;
-    }
 
     void clear() {
         Arrays.fill(storage, null);
@@ -41,7 +32,8 @@ public class ArrayStorage {
     void delete(String uuid) {
         for (int i = 0; i < size(); i++) {
             if (uuid.equals(storage[i].uuid)) {
-                storage[i] = null;
+                Resume[] tmp = storage;
+                storage = (Resume[]) ArrayUtils.addAll(ArrayUtils.remove(tmp, i), new Resume[1]);
                 return;
             }
         }
@@ -51,7 +43,7 @@ public class ArrayStorage {
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        return Arrays.copyOf(sort(storage), size());
+        return Arrays.copyOf(storage, size());
     }
 
     int size() {
