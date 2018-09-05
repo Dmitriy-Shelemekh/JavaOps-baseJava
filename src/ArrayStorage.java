@@ -5,35 +5,71 @@ import java.util.Arrays;
  */
 public class ArrayStorage {
     private static final int RESUME_LIMIT = 10000;
-    private static int storageSize = 0;
+    private static int resumeCount = 0;
     private Resume[] storage = new Resume[RESUME_LIMIT];
+
+    public void update(Resume r, String id) {
+        if (!isResumeInStorage(r.getUuid())) {
+            System.out.println(ErrorMessages.NO_IN_STORAGE_ERROR.getMsg());
+            return;
+        }
+
+        if (isResumeInStorage(id)) {
+            System.out.println(ErrorMessages.ALREADY_EXIST_NAME_ERROR.getMsg());
+            return;
+        }
+
+        if (isResumeInStorage(r.getUuid())) {
+            Resume resume = get(r.getUuid());
+            resume.setUuid(id);
+        }
+    }
 
     void clear() {
         Arrays.fill(storage, null);
-        storageSize = 0;
+        resumeCount = 0;
     }
 
     void save(Resume r) {
-        //Осторожно ArrayIndexOutOfBoundsException!
-//        if (get(r.uuid) == null && storageSize < RESUME_LIMIT) {
-            storage[storageSize] = r;
-            storageSize++;
-//        }
+        if (resumeCount >= RESUME_LIMIT) {
+            System.out.println(ErrorMessages.NO_FREE_SPACE_ERROR.getMsg());
+            return;
+        }
+
+        if (isResumeInStorage(r.getUuid())) {
+            System.out.println(ErrorMessages.ALREADY_EXIST_NAME_ERROR.getMsg());
+            return;
+        }
+
+        storage[resumeCount] = r;
+        resumeCount++;
     }
 
     Resume get(String uuid) {
-        for (int i = 0; i < storageSize; i++) {
-            if (uuid.equals(storage[i].uuid)) {
+        Resume resume = null;
+
+        if (!isResumeInStorage(uuid)) {
+            System.out.println(ErrorMessages.NO_IN_STORAGE_ERROR.getMsg());
+            return resume;
+        }
+
+        for (int i = 0; i < resumeCount; i++) {
+            if (uuid.equals(storage[i].getUuid())) {
                 return storage[i];
             }
         }
 
-        return null;
+        return resume;
     }
 
     void delete(String uuid) {
-        for (int i = 0; i < storageSize; i++) {
-            if (uuid.equals(storage[i].uuid)) {
+        if (!isResumeInStorage(uuid)) {
+            System.out.println(ErrorMessages.NO_IN_STORAGE_ERROR.getMsg());
+            return;
+        }
+
+        for (int i = 0; i < resumeCount; i++) {
+            if (uuid.equals(storage[i].getUuid())) {
 
                 //Плохое решение.--------------------------------------------------------
                 Resume[] arrStart = Arrays.copyOfRange(storage, 0, i);
@@ -51,7 +87,7 @@ public class ArrayStorage {
                 //Resume[] tmp = storage;
                 //storage = (Resume[]) ArrayUtils.addAll(ArrayUtils.remove(tmp, i), new Resume[1]);
 
-                storageSize--;
+                resumeCount--;
                 return;
             }
         }
@@ -61,10 +97,22 @@ public class ArrayStorage {
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        return Arrays.copyOf(storage, storageSize);
+        return Arrays.copyOf(storage, resumeCount);
     }
 
     int size() {
-        return storageSize;
+        return resumeCount;
+    }
+
+    public boolean isResumeInStorage(String id) {
+        boolean result = false;
+
+        for (Resume r : getAll()) {
+            if (id.equals(r.getUuid())) {
+                result = true;
+            }
+        }
+
+        return result;
     }
 }
