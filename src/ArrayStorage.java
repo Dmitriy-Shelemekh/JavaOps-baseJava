@@ -17,7 +17,7 @@ public class ArrayStorage {
     }
 
     void clear() {
-        Arrays.fill(storage, null);
+        Arrays.fill(storage, 0, resumeCount - 1, null);
         resumeCount = 0;
     }
 
