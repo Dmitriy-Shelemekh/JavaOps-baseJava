@@ -11,11 +11,7 @@ public class ArrayStorage {
     public void update(Resume r) {
         if (!isExist(r.getUuid())) {
             System.out.println(ErrorMessages.NO_IN_STORAGE_ERROR.getMsg());
-            return;
-        }
-
-        if (isExist(r.getUuid())) {
-            //Это временная заглушка
+        } else {
             get(r.getUuid()).setUuid(r.getUuid());
         }
     }
@@ -41,11 +37,9 @@ public class ArrayStorage {
     }
 
     Resume get(String uuid) {
-        Resume resume = null;
-
         if (!isExist(uuid)) {
             System.out.println(ErrorMessages.NO_IN_STORAGE_ERROR.getMsg());
-            return resume;
+            return null;
         }
 
         for (int i = 0; i < resumeCount; i++) {
@@ -54,7 +48,7 @@ public class ArrayStorage {
             }
         }
 
-        return resume;
+        return null;
     }
 
     void delete(String uuid) {
@@ -65,8 +59,8 @@ public class ArrayStorage {
 
         for (int i = 0; i < resumeCount; i++) {
             if (uuid.equals(storage[i].getUuid())) {
-                storage[i] = storage[resumeCount-1];
-                storage[resumeCount-1] = null;
+                storage[i] = storage[resumeCount - 1];
+                storage[resumeCount - 1] = null;
                 resumeCount--;
                 return;
             }
