@@ -5,7 +5,7 @@ import java.util.Arrays;
  */
 public class ArrayStorage {
     private static final int RESUME_LIMIT = 10000;
-    private static int resumeCount = 0;
+    private int resumeCount = 0;
     private Resume[] storage = new Resume[RESUME_LIMIT];
 
     public void update(Resume r, String id) {
