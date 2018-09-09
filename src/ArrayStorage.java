@@ -89,15 +89,13 @@ public class ArrayStorage {
         return resumeCount;
     }
 
-    public boolean isResumeInStorage(String id) {
-        boolean result = false;
-
+    private boolean isResumeInStorage(String id) {
         for (Resume r : getAll()) {
             if (id.equals(r.getUuid())) {
-                result = true;
+                return true;
             }
         }
 
-        return result;
+        return false;
     }
 }
