@@ -70,23 +70,8 @@ public class ArrayStorage {
 
         for (int i = 0; i < resumeCount; i++) {
             if (uuid.equals(storage[i].getUuid())) {
-
-                //Плохое решение.--------------------------------------------------------
-                Resume[] arrStart = Arrays.copyOfRange(storage, 0, i);
-                Resume[] arrEnd = Arrays.copyOfRange(storage, i + 1, storage.length);
-
-                Resume[] arrResult = new Resume[arrStart.length + arrEnd.length + 1];
-
-                System.arraycopy(arrStart, 0, arrResult, 0, arrStart.length);
-                System.arraycopy(arrEnd, 0, arrResult, arrStart.length, arrEnd.length);
-
-                storage = arrResult;
-                //---------------------------------------------------------------------------
-
-                //Это решения лучше.
-                //Resume[] tmp = storage;
-                //storage = (Resume[]) ArrayUtils.addAll(ArrayUtils.remove(tmp, i), new Resume[1]);
-
+                storage[i] = storage[resumeCount-1];
+                storage[resumeCount-1] = null;
                 resumeCount--;
                 return;
             }
