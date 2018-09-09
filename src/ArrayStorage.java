@@ -8,20 +8,15 @@ public class ArrayStorage {
     private int resumeCount = 0;
     private Resume[] storage = new Resume[RESUME_LIMIT];
 
-    public void update(Resume r, String id) {
-        if (!isResumeInStorage(r.getUuid())) {
+    public void update(Resume r) {
+        if (!isExist(r.getUuid())) {
             System.out.println(ErrorMessages.NO_IN_STORAGE_ERROR.getMsg());
             return;
         }
 
-        if (isResumeInStorage(id)) {
-            System.out.println(ErrorMessages.ALREADY_EXIST_NAME_ERROR.getMsg());
-            return;
-        }
-
-        if (isResumeInStorage(r.getUuid())) {
-            Resume resume = get(r.getUuid());
-            resume.setUuid(id);
+        if (isExist(r.getUuid())) {
+            //Это временная заглушка
+            get(r.getUuid()).setUuid(r.getUuid());
         }
     }
 
@@ -36,7 +31,7 @@ public class ArrayStorage {
             return;
         }
 
-        if (isResumeInStorage(r.getUuid())) {
+        if (isExist(r.getUuid())) {
             System.out.println(ErrorMessages.ALREADY_EXIST_NAME_ERROR.getMsg());
             return;
         }
@@ -48,7 +43,7 @@ public class ArrayStorage {
     Resume get(String uuid) {
         Resume resume = null;
 
-        if (!isResumeInStorage(uuid)) {
+        if (!isExist(uuid)) {
             System.out.println(ErrorMessages.NO_IN_STORAGE_ERROR.getMsg());
             return resume;
         }
@@ -63,7 +58,7 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-        if (!isResumeInStorage(uuid)) {
+        if (!isExist(uuid)) {
             System.out.println(ErrorMessages.NO_IN_STORAGE_ERROR.getMsg());
             return;
         }
@@ -89,7 +84,7 @@ public class ArrayStorage {
         return resumeCount;
     }
 
-    private boolean isResumeInStorage(String id) {
+    private boolean isExist(String id) {
         for (Resume r : getAll()) {
             if (id.equals(r.getUuid())) {
                 return true;
