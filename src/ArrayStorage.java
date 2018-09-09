@@ -11,8 +11,14 @@ public class ArrayStorage {
     public void update(Resume r) {
         if (!isExist(r.getUuid())) {
             System.out.println(ErrorMessages.NO_IN_STORAGE_ERROR.getMsg());
-        } else {
-            get(r.getUuid()).setUuid(r.getUuid());
+            return;
+        }
+
+        for (int i = 0; i < resumeCount; i++) {
+            if (r.getUuid().equals(storage[i].getUuid())) {
+                storage[i] = r;
+                return;
+            }
         }
     }
 
