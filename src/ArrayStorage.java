@@ -9,16 +9,12 @@ public class ArrayStorage {
     private Resume[] storage = new Resume[RESUME_LIMIT];
 
     public void update(Resume r) {
-        if (!isExist(r.getUuid())) {
-            System.out.println(ErrorMessages.NO_IN_STORAGE_ERROR.getMsg());
-            return;
-        }
+        int storageIndex = getIndex(r.getUuid());
 
-        for (int i = 0; i < resumeCount; i++) {
-            if (r.getUuid().equals(storage[i].getUuid())) {
-                storage[i] = r;
-                return;
-            }
+        if (storageIndex < 0) {
+            System.out.println(ErrorMessages.NO_IN_STORAGE_ERROR.getMsg());
+        } else {
+            storage[storageIndex] = r;
         }
     }
 
@@ -33,43 +29,37 @@ public class ArrayStorage {
             return;
         }
 
-        if (isExist(r.getUuid())) {
+        int storageIndex = getIndex(r.getUuid());
+
+        if (storageIndex > 0) {
             System.out.println(ErrorMessages.ALREADY_EXIST_NAME_ERROR.getMsg());
-            return;
+        } else {
+            storage[resumeCount] = r;
+            resumeCount++;
         }
 
-        storage[resumeCount] = r;
-        resumeCount++;
     }
 
     Resume get(String uuid) {
-        if (!isExist(uuid)) {
+        int storageIndex = getIndex(uuid);
+
+        if (storageIndex < 0) {
             System.out.println(ErrorMessages.NO_IN_STORAGE_ERROR.getMsg());
             return null;
+        } else {
+            return storage[storageIndex];
         }
-
-        for (int i = 0; i < resumeCount; i++) {
-            if (uuid.equals(storage[i].getUuid())) {
-                return storage[i];
-            }
-        }
-
-        return null;
     }
 
     void delete(String uuid) {
-        if (!isExist(uuid)) {
-            System.out.println(ErrorMessages.NO_IN_STORAGE_ERROR.getMsg());
-            return;
-        }
+        int storageIndex = getIndex(uuid);
 
-        for (int i = 0; i < resumeCount; i++) {
-            if (uuid.equals(storage[i].getUuid())) {
-                storage[i] = storage[resumeCount - 1];
-                storage[resumeCount - 1] = null;
-                resumeCount--;
-                return;
-            }
+        if (storageIndex < 0) {
+            System.out.println(ErrorMessages.NO_IN_STORAGE_ERROR.getMsg());
+        } else {
+            storage[storageIndex] = storage[resumeCount - 1];
+            storage[resumeCount - 1] = null;
+            resumeCount--;
         }
     }
 
@@ -84,13 +74,13 @@ public class ArrayStorage {
         return resumeCount;
     }
 
-    private boolean isExist(String id) {
-        for (Resume r : getAll()) {
-            if (id.equals(r.getUuid())) {
-                return true;
+    private int getIndex(String id) {
+        for (int i = 0; i < resumeCount; i++) {
+            if (id.equals(storage[i].getUuid())) {
+                return i;
             }
         }
 
-        return false;
+        return -1;
     }
 }
