@@ -1,7 +1,4 @@
-/**
- * Array based storage for Resumes
- */
-public class ArrayStorage extends AbstractArrayStorage {
+public class SortedArrayStorage extends AbstractArrayStorage {
     @Override
     void save(Resume r) {
         if (resumeCount >= storageLimit) {
@@ -14,7 +11,17 @@ public class ArrayStorage extends AbstractArrayStorage {
         if (resumeIndex > 0) {
             System.out.println(ErrorMessages.ALREADY_EXIST_NAME_ERROR.getMsg());
         } else {
-            storage[resumeCount] = r;
+            for (int i = 0; i < resumeCount; i++) {
+                if (r.compareTo(storage[i]) > 0 && r.compareTo(storage[i + 1]) < 0) {
+                    System.arraycopy(storage, i, storage, i + 1, resumeCount);
+                    storage[i + 1] = r;
+                    resumeCount++;
+                    return;
+                }
+            }
+
+            System.arraycopy(storage, 0, storage, resumeCount, resumeCount);
+            storage[0] = r;
             resumeCount++;
         }
     }
@@ -26,13 +33,7 @@ public class ArrayStorage extends AbstractArrayStorage {
         if (resumeIndex < 0) {
             System.out.println(ErrorMessages.NO_IN_STORAGE_ERROR.getMsg());
         } else {
-            if (resumeIndex == resumeCount - 1) {
-                storage[resumeCount - 1] = null;
-            } else {
-                storage[resumeIndex] = storage[resumeCount - 1];
-                storage[resumeCount - 1] = null;
-            }
-
+            System.arraycopy(storage, resumeIndex + 1, storage, resumeIndex, resumeCount);
             resumeCount--;
         }
     }
