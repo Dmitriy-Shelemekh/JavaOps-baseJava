@@ -1,3 +1,5 @@
+package main.java.model;
+
 /**
  * Initial resume class
  */
@@ -15,7 +17,7 @@ public class Resume {
         this.uuid = uuid;
     }
 
-    int compareTo(Resume r) {
+    public int compareTo(Resume r) {
         return this.uuid.compareToIgnoreCase(r.uuid);
     }
 

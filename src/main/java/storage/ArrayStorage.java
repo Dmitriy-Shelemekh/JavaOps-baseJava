@@ -1,5 +1,10 @@
+package main.java.storage;
+
+import main.java.model.Errors;
+import main.java.model.Resume;
+
 /**
- * Array based storage for Resumes
+ * Array based main.java.storage for Resumes
  */
 public class ArrayStorage extends AbstractArrayStorage {
     private int storageLimit = 10000;
@@ -53,7 +58,7 @@ public class ArrayStorage extends AbstractArrayStorage {
 
 //    private int getIndex(String id) {
 //        for (int i = 0; i < resumeCount; i++) {
-//            if (id.equals(storage[i].getUuid())) {
+//            if (id.equals(main.java.storage[i].getUuid())) {
 //                return i;
 //            }
 //        }

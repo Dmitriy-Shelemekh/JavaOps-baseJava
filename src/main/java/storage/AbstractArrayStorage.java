@@ -1,3 +1,7 @@
+package main.java.storage;
+
+import main.java.model.Resume;
+
 import java.util.Arrays;
 
 public abstract class AbstractArrayStorage {
@@ -18,16 +22,16 @@ public abstract class AbstractArrayStorage {
 //        int storageIndex = getIndex(uuid);
 //
 //        if (storageIndex < 0) {
-//            System.out.println(Errors.NOT_IN_STORAGE);
+//            System.out.println(main.java.modeljava.Errors.NOT_IN_STORAGE);
 //            return null;
 //        } else {
-//            return storage[storageIndex];
+//            return main.java.storage[storageIndex];
 //        }
 //    }
 
     public abstract void clear();
 //    {
-//        Arrays.fill(storage, 0, resumeCount, null);
+//        Arrays.fill(main.java.storage, 0, resumeCount, null);
 //        resumeCount = 0;
 //    }
 
@@ -36,9 +40,9 @@ public abstract class AbstractArrayStorage {
 //        int storageIndex = getIndex(r.getUuid());
 //
 //        if (storageIndex < 0) {
-//            System.out.println(Errors.NOT_IN_STORAGE);
+//            System.out.println(main.java.modeljava.Errors.NOT_IN_STORAGE);
 //        } else {
-//            storage[storageIndex] = r;
+//            main.java.storage[storageIndex] = r;
 //        }
 //    }
 

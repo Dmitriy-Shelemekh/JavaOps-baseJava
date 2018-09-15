@@ -1,9 +1,14 @@
+package main.java;
+
+import main.java.model.Resume;
+import main.java.storage.ArrayStorage;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Interactive test for ArrayStorage implementation
+ * Interactive main.test for main.java.ArrayStoragerayStorage implementation
  * (just run, no need to understand)
  */
 public class MainArray {

@@ -1,3 +1,8 @@
+package main.java.storage;
+
+import main.java.model.Errors;
+import main.java.model.Resume;
+
 public class SortedArrayStorage extends AbstractArrayStorage {
     private int storageLimit = 10000;
     private int resumeCount = 0;
@@ -59,7 +64,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
 //        private int getIndex(String id) {
 //        for (int i = 0; i < resumeCount; i++) {
-//            if (id.equals(storage[i].getUuid())) {
+//            if (id.equals(main.java.storage[i].getUuid())) {
 //                return i;
 //            }
 //        }

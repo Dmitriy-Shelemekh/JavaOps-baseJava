@@ -1,5 +1,11 @@
+package main.test;
+
+import main.java.model.Resume;
+import main.java.storage.AbstractArrayStorage;
+import main.java.storage.ArrayStorage;
+
 /**
- * Test for your ArrayStorage implementation
+ * Test for your main.java.ArrayStoragerayStorage implementation
  */
 public class MainTestArrayStorage {
     private static final AbstractArrayStorage ARRAY_STORAGE = new ArrayStorage();
