@@ -5,41 +5,44 @@ public abstract class AbstractArrayStorage {
     int resumeCount = 0;
     Resume[] storage = new Resume[storageLimit];
 
-    abstract void save(Resume r);
+    public abstract void save(Resume r);
 
-    abstract void delete(String uuid);
+    public abstract void delete(String uuid);
 
-    Resume[] getAll() {
+    public Resume[] getAll() {
         return Arrays.copyOf(storage, resumeCount);
     }
 
-    Resume get(String uuid) {
-        int storageIndex = getIndex(uuid);
+    public abstract Resume get(String uuid);
+//    {
+//        int storageIndex = getIndex(uuid);
+//
+//        if (storageIndex < 0) {
+//            System.out.println(Errors.NOT_IN_STORAGE);
+//            return null;
+//        } else {
+//            return storage[storageIndex];
+//        }
+//    }
 
-        if (storageIndex < 0) {
-            System.out.println(ErrorMessages.NO_IN_STORAGE_ERROR.getMsg());
-            return null;
-        } else {
-            return storage[storageIndex];
-        }
-    }
+    public abstract void clear();
+//    {
+//        Arrays.fill(storage, 0, resumeCount, null);
+//        resumeCount = 0;
+//    }
 
-    void clear() {
-        Arrays.fill(storage, 0, resumeCount, null);
-        resumeCount = 0;
-    }
+    public abstract void update(Resume r);
+//    {
+//        int storageIndex = getIndex(r.getUuid());
+//
+//        if (storageIndex < 0) {
+//            System.out.println(Errors.NOT_IN_STORAGE);
+//        } else {
+//            storage[storageIndex] = r;
+//        }
+//    }
 
-    void update(Resume r) {
-        int storageIndex = getIndex(r.getUuid());
-
-        if (storageIndex < 0) {
-            System.out.println(ErrorMessages.NO_IN_STORAGE_ERROR.getMsg());
-        } else {
-            storage[storageIndex] = r;
-        }
-    }
-
-    int getIndex(String id) {
+    public int getIndex(String id) {
         for (int i = 0; i < resumeCount; i++) {
             if (id.equals(storage[i].getUuid())) {
                 return i;
@@ -49,7 +52,7 @@ public abstract class AbstractArrayStorage {
         return -1;
     }
 
-    int getResumeCount() {
+    public int getResumeCount() {
         return resumeCount;
     }
 }

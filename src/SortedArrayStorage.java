@@ -1,15 +1,34 @@
 public class SortedArrayStorage extends AbstractArrayStorage {
+    private int storageLimit = 10000;
+    private int resumeCount = 0;
+    private Resume[] storage = new Resume[storageLimit];
+
     @Override
-    void save(Resume r) {
+    public Resume get(String uuid) {
+        return null;
+    }
+
+    @Override
+    public void clear() {
+
+    }
+
+    @Override
+    public void update(Resume r) {
+
+    }
+
+    @Override
+    public void save(Resume r) {
         if (resumeCount >= storageLimit) {
-            System.out.println(ErrorMessages.NO_FREE_SPACE_ERROR.getMsg());
+            System.out.println(Errors.NO_FREE_SPACE);
             return;
         }
 
         int resumeIndex = getIndex(r.getUuid());
 
         if (resumeIndex > 0) {
-            System.out.println(ErrorMessages.ALREADY_EXIST_NAME_ERROR.getMsg());
+            System.out.println(Errors.ALREADY_EXIST);
         } else {
             for (int i = 0; i < resumeCount; i++) {
                 if (r.compareTo(storage[i]) > 0 && r.compareTo(storage[i + 1]) < 0) {
@@ -27,14 +46,24 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     }
 
     @Override
-    void delete(String uuid) {
+    public void delete(String uuid) {
         int resumeIndex = getIndex(uuid);
 
         if (resumeIndex < 0) {
-            System.out.println(ErrorMessages.NO_IN_STORAGE_ERROR.getMsg());
+            System.out.println(Errors.NOT_IN_STORAGE);
         } else {
             System.arraycopy(storage, resumeIndex + 1, storage, resumeIndex, resumeCount);
             resumeCount--;
         }
     }
+
+//        private int getIndex(String id) {
+//        for (int i = 0; i < resumeCount; i++) {
+//            if (id.equals(storage[i].getUuid())) {
+//                return i;
+//            }
+//        }
+//
+//        return -1;
+
 }
