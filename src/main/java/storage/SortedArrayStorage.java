@@ -6,22 +6,6 @@ import main.java.model.Resume;
 import java.util.Arrays;
 
 public class SortedArrayStorage extends AbstractArrayStorage {
-//    private int storageLimit = 10000;
-//    private int resumeCount = 0;
-//    private Resume[] storage = new Resume[storageLimit];
-
-
-//    @Override
-//    public Resume get(String uuid) {
-//        return null;
-//    }
-
-
-    @Override
-    public void update(Resume r) {
-
-    }
-
     @Override
     public void save(Resume r) {
         if (size >= STORAGE_LIMIT) {
@@ -48,28 +32,6 @@ public class SortedArrayStorage extends AbstractArrayStorage {
             size++;
         }
     }
-
-//    @Override
-//    public void delete(String uuid) {
-//        int resumeIndex = getIndex(uuid);
-//
-//        if (resumeIndex < 0) {
-//            System.out.println(Errors.NOT_IN_STORAGE);
-//        } else {
-//            System.arraycopy(storage, resumeIndex + 1, storage, resumeIndex, size);
-//            size--;
-//        }
-//    }
-
-//    @Override
-//    public Resume[] getAll() {
-//        return Arrays.copyOf(storage, size);
-//    }
-
-//    @Override
-//    public int size() {
-//        return size;
-//    }
 
     @Override
     protected int getIndex(String uuid) {

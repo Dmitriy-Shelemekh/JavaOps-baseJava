@@ -16,14 +16,6 @@ public class ArrayStorage extends AbstractArrayStorage {
 //        return null;
 //    }
 
-
-
-
-    @Override
-    public void update(Resume r) {
-
-    }
-
     @Override
     public void save(Resume r) {
         if (size >= STORAGE_LIMIT) {

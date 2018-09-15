@@ -44,16 +44,15 @@ public abstract class AbstractArrayStorage implements Storage {
         size = 0;
     }
 
-//    public abstract void update(Resume r);
-//    {
-//        int storageIndex = getIndex(r.getUuid());
-//
-//        if (storageIndex < 0) {
-//            System.out.println(main.java.modeljava.Errors.NOT_IN_STORAGE);
-//        } else {
-//            main.java.storage[storageIndex] = r;
-//        }
-//    }
+    public void update(Resume r) {
+        int index = getIndex(r.getUuid());
+
+        if (index < 0) {
+            System.out.println(Errors.NOT_IN_STORAGE);
+        } else {
+            storage[index] = r;
+        }
+    }
 
     protected abstract int getIndex(String id);
 //    {
