@@ -7,14 +7,14 @@ import main.java.model.Resume;
  * Array based main.java.storage for Resumes
  */
 public class ArrayStorage extends AbstractArrayStorage {
-    private int storageLimit = 10000;
-    private int resumeCount = 0;
-    private Resume[] storage = new Resume[storageLimit];
+//    private int storageLimit = 10000;
+//    private int resumeCount = 0;
+//    private Resume[] storage = new Resume[storageLimit];
 
-    @Override
-    public Resume get(String uuid) {
-        return null;
-    }
+//    @Override
+//    public Resume get(String uuid) {
+//        return null;
+//    }
 
     @Override
     protected int getIndex(String id) {
@@ -33,7 +33,7 @@ public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
     public void save(Resume r) {
-        if (resumeCount >= storageLimit) {
+        if (size >= STORAGE_LIMIT) {
             System.out.println(Errors.NO_FREE_SPACE);
             return;
         }
@@ -43,8 +43,8 @@ public class ArrayStorage extends AbstractArrayStorage {
         if (resumeIndex > 0) {
             System.out.println(Errors.ALREADY_EXIST);
         } else {
-            storage[resumeCount] = r;
-            resumeCount++;
+            storage[size] = r;
+            size++;
         }
     }
 
@@ -55,9 +55,9 @@ public class ArrayStorage extends AbstractArrayStorage {
         if (resumeIndex < 0) {
             System.out.println(Errors.NOT_IN_STORAGE);
         } else {
-            storage[resumeIndex] = storage[resumeCount - 1];
-            storage[resumeCount - 1] = null;
-            resumeCount--;
+            storage[resumeIndex] = storage[size - 1];
+            storage[size - 1] = null;
+            size--;
         }
     }
 
@@ -72,7 +72,7 @@ public class ArrayStorage extends AbstractArrayStorage {
     }
 
 //    private int getIndex(String id) {
-//        for (int i = 0; i < resumeCount; i++) {
+//        for (int i = 0; i < size; i++) {
 //            if (id.equals(main.java.storage[i].getUuid())) {
 //                return i;
 //            }

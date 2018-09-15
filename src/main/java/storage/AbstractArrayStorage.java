@@ -4,9 +4,9 @@ import main.java.model.Errors;
 import main.java.model.Resume;
 
 public abstract class AbstractArrayStorage implements Storage {
-    private static final int STORAGE_LIMIT = 10000;
-    private Resume[] storage = new Resume[STORAGE_LIMIT];
-    private int size = 0;
+    protected static final int STORAGE_LIMIT = 10000;
+    protected Resume[] storage = new Resume[STORAGE_LIMIT];
+    int size = 0;
 
 //    public abstract void save(Resume r);
 

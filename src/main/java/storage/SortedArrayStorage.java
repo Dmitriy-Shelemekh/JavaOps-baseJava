@@ -3,20 +3,18 @@ package main.java.storage;
 import main.java.model.Errors;
 import main.java.model.Resume;
 
+import java.util.Arrays;
+
 public class SortedArrayStorage extends AbstractArrayStorage {
-    private int storageLimit = 10000;
-    private int resumeCount = 0;
-    private Resume[] storage = new Resume[storageLimit];
+//    private int storageLimit = 10000;
+//    private int resumeCount = 0;
+//    private Resume[] storage = new Resume[storageLimit];
 
-    @Override
-    protected int getIndex(String id) {
-        return 0;
-    }
 
-    @Override
-    public Resume get(String uuid) {
-        return null;
-    }
+//    @Override
+//    public Resume get(String uuid) {
+//        return null;
+//    }
 
     @Override
     public void clear() {
@@ -30,7 +28,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     public void save(Resume r) {
-        if (resumeCount >= storageLimit) {
+        if (size >= STORAGE_LIMIT) {
             System.out.println(Errors.NO_FREE_SPACE);
             return;
         }
@@ -40,18 +38,18 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         if (resumeIndex > 0) {
             System.out.println(Errors.ALREADY_EXIST);
         } else {
-            for (int i = 0; i < resumeCount; i++) {
+            for (int i = 0; i < size; i++) {
                 if (r.compareTo(storage[i]) > 0 && r.compareTo(storage[i + 1]) < 0) {
-                    System.arraycopy(storage, i, storage, i + 1, resumeCount);
+                    System.arraycopy(storage, i, storage, i + 1, size);
                     storage[i + 1] = r;
-                    resumeCount++;
+                    size++;
                     return;
                 }
             }
 
-            System.arraycopy(storage, 0, storage, resumeCount, resumeCount);
+            System.arraycopy(storage, 0, storage, size, size);
             storage[0] = r;
-            resumeCount++;
+            size++;
         }
     }
 
@@ -62,8 +60,8 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         if (resumeIndex < 0) {
             System.out.println(Errors.NOT_IN_STORAGE);
         } else {
-            System.arraycopy(storage, resumeIndex + 1, storage, resumeIndex, resumeCount);
-            resumeCount--;
+            System.arraycopy(storage, resumeIndex + 1, storage, resumeIndex, size);
+            size--;
         }
     }
 
@@ -74,16 +72,13 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
-//        private int getIndex(String id) {
-//        for (int i = 0; i < resumeCount; i++) {
-//            if (id.equals(main.java.storage[i].getUuid())) {
-//                return i;
-//            }
-//        }
-//
-//        return -1;
-
+    @Override
+    protected int getIndex(String uuid) {
+        Resume searchKey = new Resume();
+        searchKey.setUuid(uuid);
+        return Arrays.binarySearch(storage, 0, size, searchKey);
+    }
 }
