@@ -1,4 +1,4 @@
-package main.test;
+package test.java;
 
 import main.java.model.Resume;
 import main.java.storage.AbstractArrayStorage;

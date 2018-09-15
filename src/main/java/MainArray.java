@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Interactive main.test for main.java.ArrayStoragerayStorage implementation
+ * Interactive test for main.java.ArrayStoragerayStorage implementation
  * (just run, no need to understand)
  */
 public class MainArray {
