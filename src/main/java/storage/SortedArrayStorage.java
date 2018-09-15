@@ -3,12 +3,15 @@ package main.java.storage;
 import main.java.model.Errors;
 import main.java.model.Resume;
 
-import java.util.List;
-
 public class SortedArrayStorage extends AbstractArrayStorage {
     private int storageLimit = 10000;
     private int resumeCount = 0;
     private Resume[] storage = new Resume[storageLimit];
+
+    @Override
+    protected int getIndex(String id) {
+        return 0;
+    }
 
     @Override
     public Resume get(String uuid) {
@@ -65,7 +68,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     }
 
     @Override
-    public List<Resume> getAllSorted() {
+    public Resume[] getAll() {
         return null;
     }
 

@@ -3,8 +3,6 @@ package main.java.storage;
 import main.java.model.Errors;
 import main.java.model.Resume;
 
-import java.util.List;
-
 /**
  * Array based main.java.storage for Resumes
  */
@@ -16,6 +14,11 @@ public class ArrayStorage extends AbstractArrayStorage {
     @Override
     public Resume get(String uuid) {
         return null;
+    }
+
+    @Override
+    protected int getIndex(String id) {
+        return 0;
     }
 
     @Override
@@ -59,7 +62,7 @@ public class ArrayStorage extends AbstractArrayStorage {
     }
 
     @Override
-    public List<Resume> getAllSorted() {
+    public Resume[] getAll() {
         return null;
     }
 
