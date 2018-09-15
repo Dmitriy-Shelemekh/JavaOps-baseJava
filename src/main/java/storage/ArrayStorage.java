@@ -16,10 +16,6 @@ public class ArrayStorage extends AbstractArrayStorage {
 //        return null;
 //    }
 
-    @Override
-    protected int getIndex(String id) {
-        return 0;
-    }
 
     @Override
     public void clear() {
@@ -66,18 +62,19 @@ public class ArrayStorage extends AbstractArrayStorage {
 //        return Arrays.copyOf(storage, size);
 //    }
 
-    @Override
-    public int size() {
-        return 0;
-    }
-
-//    private int getIndex(String id) {
-//        for (int i = 0; i < size; i++) {
-//            if (id.equals(main.java.storage[i].getUuid())) {
-//                return i;
-//            }
-//        }
-//
-//        return -1;
+//    @Override
+//    public int size() {
+//        return 0;
 //    }
+
+    @Override
+    protected int getIndex(String id) {
+        for (int i = 0; i < size; i++) {
+            if (id.equals(storage[i].getUuid())) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 }

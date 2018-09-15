@@ -67,6 +67,7 @@ public abstract class AbstractArrayStorage implements Storage {
 //        return -1;
 //    }
 
+    //    @Override
     public int getSize() {
         return size;
     }

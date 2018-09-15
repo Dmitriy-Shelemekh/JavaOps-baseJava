@@ -70,10 +70,10 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 //        return Arrays.copyOf(storage, size);
 //    }
 
-    @Override
-    public int size() {
-        return size;
-    }
+//    @Override
+//    public int size() {
+//        return size;
+//    }
 
     @Override
     protected int getIndex(String uuid) {
