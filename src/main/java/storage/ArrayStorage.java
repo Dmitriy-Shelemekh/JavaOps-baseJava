@@ -48,18 +48,18 @@ public class ArrayStorage extends AbstractArrayStorage {
         }
     }
 
-    @Override
-    public void delete(String uuid) {
-        int resumeIndex = getIndex(uuid);
-
-        if (resumeIndex < 0) {
-            System.out.println(Errors.NOT_IN_STORAGE);
-        } else {
-            storage[resumeIndex] = storage[size - 1];
-            storage[size - 1] = null;
-            size--;
-        }
-    }
+//    @Override
+//    public void delete(String uuid) {
+//        int resumeIndex = getIndex(uuid);
+//
+//        if (resumeIndex < 0) {
+//            System.out.println(Errors.NOT_IN_STORAGE);
+//        } else {
+//            storage[resumeIndex] = storage[size - 1];
+//            storage[size - 1] = null;
+//            size--;
+//        }
+//    }
 
 //    @Override
 //    public Resume[] getAll() {

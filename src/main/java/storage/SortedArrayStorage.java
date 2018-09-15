@@ -53,17 +53,17 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         }
     }
 
-    @Override
-    public void delete(String uuid) {
-        int resumeIndex = getIndex(uuid);
-
-        if (resumeIndex < 0) {
-            System.out.println(Errors.NOT_IN_STORAGE);
-        } else {
-            System.arraycopy(storage, resumeIndex + 1, storage, resumeIndex, size);
-            size--;
-        }
-    }
+//    @Override
+//    public void delete(String uuid) {
+//        int resumeIndex = getIndex(uuid);
+//
+//        if (resumeIndex < 0) {
+//            System.out.println(Errors.NOT_IN_STORAGE);
+//        } else {
+//            System.arraycopy(storage, resumeIndex + 1, storage, resumeIndex, size);
+//            size--;
+//        }
+//    }
 
 //    @Override
 //    public Resume[] getAll() {
