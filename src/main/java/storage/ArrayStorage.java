@@ -3,9 +3,6 @@ package main.java.storage;
 import main.java.model.Errors;
 import main.java.model.Resume;
 
-/**
- * Array based main.java.storage for Resumes
- */
 public class ArrayStorage extends AbstractArrayStorage {
     @Override
     public void save(Resume r) {
