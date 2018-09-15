@@ -13,9 +13,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
             return;
         }
 
-        int resumeIndex = getIndex(r.getUuid());
-
-        if (resumeIndex > 0) {
+        if (getIndex(r.getUuid()) > 0) {
             System.out.println(Errors.ALREADY_EXIST);
         } else {
             for (int i = 0; i < size; i++) {

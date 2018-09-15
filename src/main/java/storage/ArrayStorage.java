@@ -7,15 +7,6 @@ import main.java.model.Resume;
  * Array based main.java.storage for Resumes
  */
 public class ArrayStorage extends AbstractArrayStorage {
-//    private int storageLimit = 10000;
-//    private int resumeCount = 0;
-//    private Resume[] storage = new Resume[storageLimit];
-
-//    @Override
-//    public Resume get(String uuid) {
-//        return null;
-//    }
-
     @Override
     public void save(Resume r) {
         if (size >= STORAGE_LIMIT) {
@@ -23,38 +14,13 @@ public class ArrayStorage extends AbstractArrayStorage {
             return;
         }
 
-        int resumeIndex = getIndex(r.getUuid());
-
-        if (resumeIndex > 0) {
+        if (getIndex(r.getUuid()) > 0) {
             System.out.println(Errors.ALREADY_EXIST);
         } else {
             storage[size] = r;
             size++;
         }
     }
-
-//    @Override
-//    public void delete(String uuid) {
-//        int resumeIndex = getIndex(uuid);
-//
-//        if (resumeIndex < 0) {
-//            System.out.println(Errors.NOT_IN_STORAGE);
-//        } else {
-//            storage[resumeIndex] = storage[size - 1];
-//            storage[size - 1] = null;
-//            size--;
-//        }
-//    }
-
-//    @Override
-//    public Resume[] getAll() {
-//        return Arrays.copyOf(storage, size);
-//    }
-
-//    @Override
-//    public int size() {
-//        return 0;
-//    }
 
     @Override
     protected int getIndex(String id) {

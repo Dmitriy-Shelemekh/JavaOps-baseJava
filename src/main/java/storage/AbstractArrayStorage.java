@@ -6,11 +6,9 @@ import main.java.model.Resume;
 import java.util.Arrays;
 
 public abstract class AbstractArrayStorage implements Storage {
-    protected static final int STORAGE_LIMIT = 10000;
+    static final int STORAGE_LIMIT = 10000;
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
     int size = 0;
-
-//    public abstract void save(Resume r);
 
     public void delete(String uuid) {
         int index = getIndex(uuid);
@@ -29,13 +27,13 @@ public abstract class AbstractArrayStorage implements Storage {
     }
 
     public Resume get(String uuid) {
-        int storageIndex = getIndex(uuid);
+        int index = getIndex(uuid);
 
-        if (storageIndex < 0) {
+        if (index < 0) {
             System.out.println(Errors.NOT_IN_STORAGE);
             return null;
         } else {
-            return storage[storageIndex];
+            return storage[index];
         }
     }
 
@@ -55,17 +53,7 @@ public abstract class AbstractArrayStorage implements Storage {
     }
 
     protected abstract int getIndex(String id);
-//    {
-//        for (int i = 0; i < size; i++) {
-//            if (id.equals(storage[i].getUuid())) {
-//                return i;
-//            }
-//        }
-//
-//        return -1;
-//    }
 
-    //    @Override
     public int getSize() {
         return size;
     }
