@@ -61,10 +61,10 @@ public class ArrayStorage extends AbstractArrayStorage {
         }
     }
 
-    @Override
-    public Resume[] getAll() {
-        return null;
-    }
+//    @Override
+//    public Resume[] getAll() {
+//        return Arrays.copyOf(storage, size);
+//    }
 
     @Override
     public int size() {

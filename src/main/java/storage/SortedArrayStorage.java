@@ -65,10 +65,10 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         }
     }
 
-    @Override
-    public Resume[] getAll() {
-        return null;
-    }
+//    @Override
+//    public Resume[] getAll() {
+//        return Arrays.copyOf(storage, size);
+//    }
 
     @Override
     public int size() {

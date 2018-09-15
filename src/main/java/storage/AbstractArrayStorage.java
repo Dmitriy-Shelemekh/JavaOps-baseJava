@@ -3,6 +3,8 @@ package main.java.storage;
 import main.java.model.Errors;
 import main.java.model.Resume;
 
+import java.util.Arrays;
+
 public abstract class AbstractArrayStorage implements Storage {
     protected static final int STORAGE_LIMIT = 10000;
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
@@ -12,9 +14,9 @@ public abstract class AbstractArrayStorage implements Storage {
 
 //    public abstract void delete(String uuid);
 
-//    public Resume[] getAll() {
-//        return Arrays.copyOf(storage, size);
-//    }
+    public Resume[] getAll() {
+        return Arrays.copyOf(storage, size);
+    }
 
     public Resume get(String uuid) {
         int storageIndex = getIndex(uuid);
