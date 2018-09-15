@@ -17,10 +17,7 @@ public class ArrayStorage extends AbstractArrayStorage {
 //    }
 
 
-    @Override
-    public void clear() {
 
-    }
 
     @Override
     public void update(Resume r) {

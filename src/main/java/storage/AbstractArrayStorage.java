@@ -39,11 +39,10 @@ public abstract class AbstractArrayStorage implements Storage {
         }
     }
 
-//    public abstract void clear();
-//    {
-//        Arrays.fill(main.java.storage, 0, size, null);
-//        size = 0;
-//    }
+    public void clear() {
+        Arrays.fill(storage, 0, size, null);
+        size = 0;
+    }
 
 //    public abstract void update(Resume r);
 //    {

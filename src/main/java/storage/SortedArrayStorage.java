@@ -16,10 +16,6 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 //        return null;
 //    }
 
-    @Override
-    public void clear() {
-
-    }
 
     @Override
     public void update(Resume r) {
