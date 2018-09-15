@@ -3,6 +3,8 @@ package main.java.storage;
 import main.java.model.Errors;
 import main.java.model.Resume;
 
+import java.util.List;
+
 public class SortedArrayStorage extends AbstractArrayStorage {
     private int storageLimit = 10000;
     private int resumeCount = 0;
@@ -60,6 +62,16 @@ public class SortedArrayStorage extends AbstractArrayStorage {
             System.arraycopy(storage, resumeIndex + 1, storage, resumeIndex, resumeCount);
             resumeCount--;
         }
+    }
+
+    @Override
+    public List<Resume> getAllSorted() {
+        return null;
+    }
+
+    @Override
+    public int size() {
+        return 0;
     }
 
 //        private int getIndex(String id) {

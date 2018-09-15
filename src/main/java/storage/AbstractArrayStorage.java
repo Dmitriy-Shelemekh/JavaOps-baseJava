@@ -5,16 +5,16 @@ import main.java.model.Resume;
 import java.util.Arrays;
 
 public abstract class AbstractArrayStorage implements Storage {
-    public static final int STORAGE_LIMIT = 10000;
-    int resumeCount = 0;
-    Resume[] storage = new Resume[STORAGE_LIMIT];
+    private static final int STORAGE_LIMIT = 10000;
+    private Resume[] storage = new Resume[STORAGE_LIMIT];
+    private int size = 0;
 
     public abstract void save(Resume r);
 
     public abstract void delete(String uuid);
 
     public Resume[] getAll() {
-        return Arrays.copyOf(storage, resumeCount);
+        return Arrays.copyOf(storage, size);
     }
 
     public abstract Resume get(String uuid);
@@ -31,8 +31,8 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public abstract void clear();
 //    {
-//        Arrays.fill(main.java.storage, 0, resumeCount, null);
-//        resumeCount = 0;
+//        Arrays.fill(main.java.storage, 0, size, null);
+//        size = 0;
 //    }
 
     public abstract void update(Resume r);
@@ -47,7 +47,7 @@ public abstract class AbstractArrayStorage implements Storage {
 //    }
 
     public int getIndex(String id) {
-        for (int i = 0; i < resumeCount; i++) {
+        for (int i = 0; i < size; i++) {
             if (id.equals(storage[i].getUuid())) {
                 return i;
             }
@@ -56,7 +56,7 @@ public abstract class AbstractArrayStorage implements Storage {
         return -1;
     }
 
-    public int getResumeCount() {
-        return resumeCount;
+    public int getSize() {
+        return size;
     }
 }
