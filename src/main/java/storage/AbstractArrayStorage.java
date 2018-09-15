@@ -4,10 +4,10 @@ import main.java.model.Resume;
 
 import java.util.Arrays;
 
-public abstract class AbstractArrayStorage {
-    int storageLimit = 10000;
+public abstract class AbstractArrayStorage implements Storage {
+    public static final int STORAGE_LIMIT = 10000;
     int resumeCount = 0;
-    Resume[] storage = new Resume[storageLimit];
+    Resume[] storage = new Resume[STORAGE_LIMIT];
 
     public abstract void save(Resume r);
 
