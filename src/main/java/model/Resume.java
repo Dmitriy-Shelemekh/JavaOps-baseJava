@@ -4,7 +4,7 @@ package main.java.model;
  * Initial resume class
  */
 
-public class Resume {
+public class Resume implements Comparable<Resume> {
 
     // Unique identifier
     private String uuid;
@@ -17,6 +17,7 @@ public class Resume {
         this.uuid = uuid;
     }
 
+    @Override
     public int compareTo(Resume r) {
         return this.uuid.compareToIgnoreCase(r.uuid);
     }
