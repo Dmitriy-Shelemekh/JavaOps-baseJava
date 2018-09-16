@@ -6,7 +6,9 @@ import main.java.model.Resume;
 public class ArrayStorage extends AbstractArrayStorage {
     @Override
     public void save(Resume r) {
-        if (isValid(r)) {
+        int index = getIndex(r.getUuid());
+
+        if (isValid(index)) {
             storage[size] = r;
             size++;
         }

@@ -8,9 +8,11 @@ import java.util.Arrays;
 public class SortedArrayStorage extends AbstractArrayStorage {
     @Override
     public void save(Resume r) {
-        if (isValid(r)) {
-            int index = Math.abs(getIndex(r.getUuid())) - 1;
-            System.arraycopy(storage, index, storage, index + 1, size - index);
+        int index = getIndex(r.getUuid());
+
+        if (isValid(index)) {
+            int inputIndex = Math.abs(index) - 1;
+            System.arraycopy(storage, inputIndex, storage, inputIndex + 1, size - inputIndex);
             storage[index] = r;
             size++;
         }

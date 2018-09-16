@@ -46,13 +46,13 @@ public abstract class AbstractArrayStorage implements Storage {
         return size;
     }
 
-    boolean isValid(Resume r) {
+    boolean isValid(int index) {
         if (size >= STORAGE_LIMIT) {
             System.out.println(Errors.NO_FREE_SPACE);
             return false;
         }
 
-        if (getIndex(r.getUuid()) > 0) {
+        if (index > 0) {
             System.out.println(Errors.ALREADY_EXIST);
             return false;
         }
