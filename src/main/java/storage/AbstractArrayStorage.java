@@ -10,18 +10,6 @@ public abstract class AbstractArrayStorage implements Storage {
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
     int size = 0;
 
-    public void delete(String uuid) {
-        int index = getIndex(uuid);
-
-        if (index < 0) {
-            System.out.println(Errors.NOT_IN_STORAGE);
-        } else {
-            storage[index] = storage[size - 1];
-            storage[size - 1] = null;
-            size--;
-        }
-    }
-
     public Resume[] getAll() {
         return Arrays.copyOf(storage, size);
     }
