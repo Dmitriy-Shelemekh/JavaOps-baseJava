@@ -34,6 +34,17 @@ public abstract class AbstractArrayStorage implements Storage {
         }
     }
 
+    public void delete(String uuid) {
+        int index = getIndex(uuid);
+
+        if (index < 0) {
+            System.out.println(Errors.NOT_IN_STORAGE);
+        } else {
+            deleteElement(index);
+            size--;
+        }
+    }
+
     public Resume[] getAll() {
         return Arrays.copyOf(storage, size);
     }
@@ -52,6 +63,8 @@ public abstract class AbstractArrayStorage implements Storage {
     protected abstract int getIndex(String id);
 
     public abstract void insertElement(Resume r, int index);
+
+    public abstract void deleteElement(int index);
 
     public int getSize() {
         return size;

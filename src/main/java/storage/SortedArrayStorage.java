@@ -1,23 +1,10 @@
 package main.java.storage;
 
-import main.java.model.Errors;
 import main.java.model.Resume;
 
 import java.util.Arrays;
 
 public class SortedArrayStorage extends AbstractArrayStorage {
-    @Override
-    public void delete(String uuid) {
-        int index = getIndex(uuid);
-
-        if (index < 0) {
-            System.out.println(Errors.NOT_IN_STORAGE);
-        } else {
-            System.arraycopy(storage, index + 1, storage, index, size);
-            size--;
-        }
-    }
-
     @Override
     protected int getIndex(String uuid) {
         Resume searchKey = new Resume();
@@ -30,5 +17,10 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         int inputIndex = Math.abs(index) - 1;
         System.arraycopy(storage, inputIndex, storage, inputIndex + 1, size - inputIndex);
         storage[inputIndex] = r;
+    }
+
+    @Override
+    public void deleteElement(int index) {
+        System.arraycopy(storage, index + 1, storage, index, size);
     }
 }
