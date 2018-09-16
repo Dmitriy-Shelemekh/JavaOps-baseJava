@@ -41,6 +41,7 @@ public abstract class AbstractArrayStorage implements Storage {
             System.out.println(Errors.NOT_IN_STORAGE);
         } else {
             deleteElement(index);
+            storage[size - 1] = null;
             size--;
         }
     }
