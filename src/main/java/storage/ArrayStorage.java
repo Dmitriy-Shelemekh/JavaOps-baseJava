@@ -5,16 +5,6 @@ import main.java.model.Resume;
 
 public class ArrayStorage extends AbstractArrayStorage {
     @Override
-    public void save(Resume r) {
-        int index = getIndex(r.getUuid());
-
-        if (isValid(index)) {
-            storage[size] = r;
-            size++;
-        }
-    }
-
-    @Override
     public void delete(String uuid) {
         int index = getIndex(uuid);
 
@@ -36,5 +26,10 @@ public class ArrayStorage extends AbstractArrayStorage {
         }
 
         return -1;
+    }
+
+    @Override
+    public void insertElement(Resume r, int index) {
+        storage[size] = r;
     }
 }

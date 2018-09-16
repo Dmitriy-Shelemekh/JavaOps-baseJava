@@ -15,6 +15,15 @@ public abstract class AbstractArrayStorage implements Storage {
         size = 0;
     }
 
+    public void save(Resume r) {
+        int index = getIndex(r.getUuid());
+
+        if (isValid(index)) {
+            insertElement(r, index);
+            size++;
+        }
+    }
+
     public void update(Resume r) {
         int index = getIndex(r.getUuid());
 
@@ -42,11 +51,13 @@ public abstract class AbstractArrayStorage implements Storage {
 
     protected abstract int getIndex(String id);
 
+    public abstract void insertElement(Resume r, int index);
+
     public int getSize() {
         return size;
     }
 
-    boolean isValid(int index) {
+    private boolean isValid(int index) {
         if (size >= STORAGE_LIMIT) {
             System.out.println(Errors.NO_FREE_SPACE);
             return false;
