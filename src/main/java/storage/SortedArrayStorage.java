@@ -9,17 +9,9 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     @Override
     public void save(Resume r) {
         if (isValid(r)) {
-            for (int i = 0; i < size; i++) {
-                if (r.compareTo(storage[i]) > 0 && r.compareTo(storage[i + 1]) < 0) {
-                    System.arraycopy(storage, i, storage, i + 1, size);
-                    storage[i + 1] = r;
-                    size++;
-                    return;
-                }
-            }
-
-            System.arraycopy(storage, 0, storage, size, size);
-            storage[0] = r;
+            int index = Math.abs(getIndex(r.getUuid())) - 1;
+            System.arraycopy(storage, index, storage, index + 1, size - index);
+            storage[index] = r;
             size++;
         }
     }

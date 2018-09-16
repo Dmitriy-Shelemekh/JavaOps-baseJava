@@ -2,10 +2,10 @@ package test.java;
 
 import main.java.model.Resume;
 import main.java.storage.AbstractArrayStorage;
-import main.java.storage.ArrayStorage;
+import main.java.storage.SortedArrayStorage;
 
 public class MainTestArrayStorage {
-    private static final AbstractArrayStorage ARRAY_STORAGE = new ArrayStorage();
+    private static final AbstractArrayStorage ARRAY_STORAGE = new SortedArrayStorage();
 
     public static void main(String[] args) {
         Resume r1 = new Resume();
@@ -36,6 +36,9 @@ public class MainTestArrayStorage {
         printAll();
 
         ARRAY_STORAGE.delete(r1.getUuid());
+        printAll();
+
+        ARRAY_STORAGE.delete(r5.getUuid());
         printAll();
 
         ARRAY_STORAGE.update(r2);
