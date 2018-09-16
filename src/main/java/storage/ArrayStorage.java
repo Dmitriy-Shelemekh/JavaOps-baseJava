@@ -6,14 +6,7 @@ import main.java.model.Resume;
 public class ArrayStorage extends AbstractArrayStorage {
     @Override
     public void save(Resume r) {
-        if (size >= STORAGE_LIMIT) {
-            System.out.println(Errors.NO_FREE_SPACE);
-            return;
-        }
-
-        if (getIndex(r.getUuid()) > 0) {
-            System.out.println(Errors.ALREADY_EXIST);
-        } else {
+        if (isValid(r)) {
             storage[size] = r;
             size++;
         }

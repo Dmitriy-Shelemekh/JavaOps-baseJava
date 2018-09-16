@@ -6,7 +6,7 @@ import main.java.model.Resume;
 import java.util.Arrays;
 
 public abstract class AbstractArrayStorage implements Storage {
-    static final int STORAGE_LIMIT = 10000;
+    private static final int STORAGE_LIMIT = 10000;
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
     int size = 0;
 
@@ -44,5 +44,19 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public int getSize() {
         return size;
+    }
+
+    boolean isValid(Resume r) {
+        if (size >= STORAGE_LIMIT) {
+            System.out.println(Errors.NO_FREE_SPACE);
+            return false;
+        }
+
+        if (getIndex(r.getUuid()) > 0) {
+            System.out.println(Errors.ALREADY_EXIST);
+            return false;
+        }
+
+        return true;
     }
 }
