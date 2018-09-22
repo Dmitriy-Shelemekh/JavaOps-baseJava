@@ -1,4 +1,4 @@
-package main.java.model;
+package model;
 
 public enum Errors {
     NOT_IN_STORAGE("Резюме нет в хранилище"),

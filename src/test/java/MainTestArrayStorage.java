@@ -1,8 +1,6 @@
-package test.java;
-
-import main.java.model.Resume;
-import main.java.storage.AbstractArrayStorage;
-import main.java.storage.SortedArrayStorage;
+import model.Resume;
+import storage.AbstractArrayStorage;
+import storage.SortedArrayStorage;
 
 public class MainTestArrayStorage {
     private static final AbstractArrayStorage ARRAY_STORAGE = new SortedArrayStorage();

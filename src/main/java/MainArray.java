@@ -1,7 +1,5 @@
-package main.java;
-
-import main.java.model.Resume;
-import main.java.storage.ArrayStorage;
+import model.Resume;
+import storage.ArrayStorage;
 
 import java.io.BufferedReader;
 import java.io.IOException;

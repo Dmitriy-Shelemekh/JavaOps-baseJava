@@ -1,6 +1,7 @@
-package main.java.storage;
+package storage;
 
-import main.java.model.Resume;
+
+import model.Resume;
 
 public class ArrayStorage extends AbstractArrayStorage {
     @Override

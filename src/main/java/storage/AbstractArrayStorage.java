@@ -1,7 +1,7 @@
-package main.java.storage;
+package storage;
 
-import main.java.model.Errors;
-import main.java.model.Resume;
+import model.Errors;
+import model.Resume;
 
 import java.util.Arrays;
 

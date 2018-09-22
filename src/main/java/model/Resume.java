@@ -1,4 +1,4 @@
-package main.java.model;
+package model;
 
 public class Resume implements Comparable<Resume> {
     private String uuid;
