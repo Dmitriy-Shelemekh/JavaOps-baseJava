@@ -5,7 +5,7 @@ import model.Resume;
 
 public class ArrayStorage extends AbstractArrayStorage {
     @Override
-    protected int getIndex(String id) {
+    public int getIndex(String id) {
         for (int i = 0; i < size; i++) {
             if (id.equals(storage[i].getUuid())) {
                 return i;

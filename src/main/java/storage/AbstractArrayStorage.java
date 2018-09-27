@@ -28,7 +28,7 @@ public abstract class AbstractArrayStorage implements Storage {
         int index = getIndex(r.getUuid());
 
         if (index < 0) {
-            System.out.println(Errors.NOT_IN_STORAGE);
+            throw new IllegalArgumentException(Errors.NOT_IN_STORAGE.toString());
         } else {
             storage[index] = r;
         }
@@ -38,7 +38,7 @@ public abstract class AbstractArrayStorage implements Storage {
         int index = getIndex(uuid);
 
         if (index < 0) {
-            System.out.println(Errors.NOT_IN_STORAGE);
+            throw new IllegalArgumentException(Errors.NOT_IN_STORAGE.toString());
         } else {
             deleteElement(index);
             storage[size - 1] = null;
@@ -61,7 +61,7 @@ public abstract class AbstractArrayStorage implements Storage {
         }
     }
 
-    protected abstract int getIndex(String id);
+    public abstract int getIndex(String id);
 
     public abstract void insertElement(Resume r, int index);
 
@@ -73,8 +73,7 @@ public abstract class AbstractArrayStorage implements Storage {
 
     private boolean isValid(int index) {
         if (size >= STORAGE_LIMIT) {
-            System.out.println(Errors.NO_FREE_SPACE);
-            return false;
+            throw new RuntimeException(Errors.NO_FREE_SPACE.toString());
         }
 
         if (index > 0) {

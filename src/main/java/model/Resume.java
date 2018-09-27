@@ -3,6 +3,14 @@ package model;
 public class Resume implements Comparable<Resume> {
     private String uuid;
 
+    public Resume(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public Resume() {
+
+    }
+
     public String getUuid() {
         return uuid;
     }
