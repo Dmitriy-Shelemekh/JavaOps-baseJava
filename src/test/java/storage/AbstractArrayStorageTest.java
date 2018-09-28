@@ -55,7 +55,7 @@ public abstract class AbstractArrayStorageTest {
         storage.save(testResume);
 
         Assert.assertTrue("Ошибка при сохраниении резюме",
-                storage.getIndex(testResume.getUuid()) == 0);
+                storage.getSize() == 1);
     }
 
     @Test
@@ -119,7 +119,7 @@ public abstract class AbstractArrayStorageTest {
 
     private void fillStorageTestData(Storage storage, int count) {
         if (count <= 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Колличество элементов должно быть >= '0'");
         }
 
         while (count > 0) {
