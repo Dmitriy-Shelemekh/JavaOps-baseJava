@@ -22,6 +22,7 @@ public abstract class AbstractArrayStorageTest {
     @Test
     public void testGetSize() {
         fillStorageTestData(storage, resumeCount);
+
         Assert.assertTrue("Ошибка при получении размера массива",
                 storage.getSize() == resumeCount);
     }
@@ -29,7 +30,8 @@ public abstract class AbstractArrayStorageTest {
     @Test
     public void testGetAll() {
         fillStorageTestData(storage, resumeCount);
-        Assert.assertTrue("Ошибка: Массив пуст.",
+
+        Assert.assertTrue("Ошибка: Массив пуст",
                 storage.getAll().length == resumeCount);
     }
 
@@ -37,6 +39,10 @@ public abstract class AbstractArrayStorageTest {
     public void testUpdate() {
         storage.save(testResume);
         storage.update(testResume);
+
+        Assert.assertEquals("Ошибка при обновлении резюме",
+                testResume,
+                storage.get(testResume.getUuid()));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -47,8 +53,18 @@ public abstract class AbstractArrayStorageTest {
     @Test
     public void testSave() {
         storage.save(testResume);
-        Assert.assertTrue("Ошибка при сохраниении массива.",
-                storage.getIndex(testResume.getUuid()) >= 0);
+
+        Assert.assertTrue("Ошибка при сохраниении резюме",
+                storage.getIndex(testResume.getUuid()) == 0);
+    }
+
+    @Test
+    public void testSaveAlreadyExist() {
+        storage.save(testResume);
+        storage.save(testResume);
+
+        Assert.assertTrue("Ошибка при сохраниении резюме",
+                storage.getSize() == 1);
     }
 
     @Test(expected = RuntimeException.class)
@@ -65,11 +81,9 @@ public abstract class AbstractArrayStorageTest {
     @Test
     public void testClear() {
         fillStorageTestData(storage, resumeCount);
-        Assert.assertFalse("Ошибка: Массив не должен быть пустым.",
-                storage.getSize() == 0);
-
         storage.clear();
-        Assert.assertTrue("Ошибка при очистке массива.",
+
+        Assert.assertTrue("Ошибка при очистке массива",
                 storage.getSize() == 0);
     }
 
@@ -78,7 +92,7 @@ public abstract class AbstractArrayStorageTest {
         storage.save(testResume);
         storage.delete(testResume.getUuid());
 
-        Assert.assertTrue("Ошибка при удалении объекта.",
+        Assert.assertTrue("Ошибка при удалении объекта",
                 storage.getIndex(testResume.getUuid()) < 0);
     }
 
@@ -90,14 +104,15 @@ public abstract class AbstractArrayStorageTest {
     @Test
     public void testGet() {
         storage.save(testResume);
-        Assert.assertEquals("Ошибка при получении объекта из массива.",
+
+        Assert.assertEquals("Ошибка при получении объекта из массива",
                 testResume,
                 storage.get(testResume.getUuid()));
     }
 
     @Test
     public void testGetNull() {
-        Assert.assertTrue("Ошибка при получении объекта из массива.",
+        Assert.assertTrue("Ошибка при получении объекта из массива",
                 storage.get(testResume.getUuid()) == null);
     }
 

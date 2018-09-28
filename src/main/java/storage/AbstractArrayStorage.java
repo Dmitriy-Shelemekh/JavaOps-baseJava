@@ -76,7 +76,7 @@ public abstract class AbstractArrayStorage implements Storage {
             throw new RuntimeException(Errors.NO_FREE_SPACE.toString());
         }
 
-        if (index > 0) {
+        if (index >= 0) {
             System.out.println(Errors.ALREADY_EXIST);
             return false;
         }
