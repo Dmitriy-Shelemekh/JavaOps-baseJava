@@ -1,13 +1,15 @@
 package storage;
 
+import exception.ExistStorageException;
+import exception.NotExistStorageException;
 import model.Errors;
 import model.Resume;
 
 import java.util.Arrays;
 
 public abstract class AbstractArrayStorage implements Storage {
-    private static final int STORAGE_LIMIT = 10000;
-    protected Resume[] storage = new Resume[STORAGE_LIMIT];
+    public static final int STORAGE_LIMIT = 10000;
+    Resume[] storage = new Resume[STORAGE_LIMIT];
     int size = 0;
 
     public void clear() {
@@ -54,8 +56,7 @@ public abstract class AbstractArrayStorage implements Storage {
         int index = getIndex(uuid);
 
         if (index < 0) {
-            System.out.println(Errors.NOT_IN_STORAGE);
-            return null;
+            throw new NotExistStorageException(Errors.NOT_IN_STORAGE.toString());
         } else {
             return storage[index];
         }
@@ -77,8 +78,7 @@ public abstract class AbstractArrayStorage implements Storage {
         }
 
         if (index >= 0) {
-            System.out.println(Errors.ALREADY_EXIST);
-            return false;
+            throw new ExistStorageException(Errors.ALREADY_EXIST.toString()); //System.out.println(Errors.ALREADY_EXIST);
         }
 
         return true;

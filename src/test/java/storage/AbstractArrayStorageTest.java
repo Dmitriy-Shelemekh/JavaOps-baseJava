@@ -1,14 +1,20 @@
 package storage;
 
+import exception.ExistStorageException;
+import exception.NotExistStorageException;
+import exception.StorageException;
 import model.Resume;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public abstract class AbstractArrayStorageTest {
-    private int resumeCount = 4;
-    private Resume testResume = new Resume("uuid25");
+
     private Storage storage;
+    private static final Resume RESUME_1 = new Resume("uuid1");
+    private static final Resume RESUME_2 = new Resume("uuid2");
+    private static final Resume RESUME_3 = new Resume("uuid3");
+    private static final Resume RESUME_4 = new Resume("uuid4");
 
     AbstractArrayStorageTest(Storage storage) {
         this.storage = storage;
@@ -17,114 +23,100 @@ public abstract class AbstractArrayStorageTest {
     @Before
     public void beforeTest() {
         storage.clear();
+
+        storage.save(RESUME_1);
+        storage.save(RESUME_2);
+        storage.save(RESUME_3);
     }
 
     @Test
     public void testGetSize() {
-        fillStorageTestData(storage, resumeCount);
-
-        Assert.assertTrue("Ошибка при получении размера массива",
-                storage.getSize() == resumeCount);
+        assertSize(3);
     }
 
     @Test
     public void testGetAll() {
-        fillStorageTestData(storage, resumeCount);
+        Resume[] resumes = storage.getAll();
 
-        Assert.assertTrue("Ошибка: Массив пуст",
-                storage.getAll().length == resumeCount);
+        Assert.assertEquals("Ошибка при проверке массива", 3, storage.getSize());
+        Assert.assertEquals("Ошибка при проверке елемента массива", RESUME_1, resumes[0]);
+        Assert.assertEquals("Ошибка при проверке елемента массива", RESUME_2, resumes[1]);
+        Assert.assertEquals("Ошибка при проверке елемента массива", RESUME_3, resumes[2]);
     }
 
     @Test
     public void testUpdate() {
-        storage.save(testResume);
-        storage.update(testResume);
-
-        Assert.assertEquals("Ошибка при обновлении резюме",
-                testResume,
-                storage.get(testResume.getUuid()));
+        storage.update(RESUME_1);
+        assertGet(RESUME_1);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testUpdateError() {
-        storage.update(testResume);
+        storage.update(RESUME_4);
     }
 
     @Test
     public void testSave() {
-        storage.save(testResume);
-
-        Assert.assertTrue("Ошибка при сохраниении резюме",
-                storage.getSize() == 1);
+        int size = storage.getSize();
+        storage.save(RESUME_4);
+        assertSize(size + 1);
+        assertGet(RESUME_4);
     }
 
-    @Test
+    @Test(expected = ExistStorageException.class)
     public void testSaveAlreadyExist() {
-        storage.save(testResume);
-        storage.save(testResume);
-
-        Assert.assertTrue("Ошибка при сохраниении резюме",
-                storage.getSize() == 1);
+        storage.save(RESUME_1);
     }
 
     @Test(expected = RuntimeException.class)
     public void testStorageOverflow() {
         try {
-            fillStorageTestData(storage, 10000);
-        } catch (Exception e) {
+            for (int i = storage.getSize(); i <= AbstractArrayStorage.STORAGE_LIMIT + 1; i++) {
+                storage.save(new Resume());
+            }
+        } catch (StorageException e) {
             Assert.fail("Ошибка: " + e);
         }
-
         storage.save(new Resume("Overflowed"));
     }
 
     @Test
     public void testClear() {
-        fillStorageTestData(storage, resumeCount);
         storage.clear();
-
-        Assert.assertTrue("Ошибка при очистке массива",
-                storage.getSize() == 0);
+        assertSize(0);
     }
 
-    @Test
+    @Test(expected = NotExistStorageException.class)
     public void testDelete() {
-        storage.save(testResume);
-        storage.delete(testResume.getUuid());
-
-        Assert.assertTrue("Ошибка при удалении объекта",
-                storage.getIndex(testResume.getUuid()) < 0);
+        storage.delete(RESUME_1.getUuid());
+        assertSize(2);
+        storage.get(RESUME_1.getUuid());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testDeleteError() {
-        storage.delete(testResume.getUuid());
+        storage.delete(RESUME_4.getUuid());
     }
 
     @Test
     public void testGet() {
-        storage.save(testResume);
+        assertGet(RESUME_1);
+        assertGet(RESUME_2);
+        assertGet(RESUME_3);
+    }
 
+    @Test(expected = NotExistStorageException.class)
+    public void testGetNotExist() {
+        storage.get(RESUME_4.getUuid());
+    }
+
+    private void assertGet(Resume r) {
         Assert.assertEquals("Ошибка при получении объекта из массива",
-                testResume,
-                storage.get(testResume.getUuid()));
+                r, storage.get(r.getUuid()));
     }
 
-    @Test
-    public void testGetNull() {
-        Assert.assertTrue("Ошибка при получении объекта из массива",
-                storage.get(testResume.getUuid()) == null);
-    }
-
-
-    private void fillStorageTestData(Storage storage, int count) {
-        if (count <= 0) {
-            throw new IllegalArgumentException("Колличество элементов должно быть >= '0'");
-        }
-
-        while (count > 0) {
-            storage.save(new Resume("uuid" + count));
-            count--;
-        }
+    private void assertSize(int size) {
+        Assert.assertEquals("Ошибка при проверке колличества элементов",
+                size, storage.getSize());
     }
 }
