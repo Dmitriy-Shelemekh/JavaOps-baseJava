@@ -30,7 +30,7 @@ public abstract class AbstractArrayStorage implements Storage {
         int index = getIndex(r.getUuid());
 
         if (index < 0) {
-            throw new IllegalArgumentException(Errors.NOT_IN_STORAGE.toString());
+            throw new NotExistStorageException(Errors.NOT_IN_STORAGE.toString());
         } else {
             storage[index] = r;
         }

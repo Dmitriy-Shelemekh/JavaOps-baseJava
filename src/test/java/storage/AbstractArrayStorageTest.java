@@ -50,7 +50,7 @@ public abstract class AbstractArrayStorageTest {
         assertGet(RESUME_1);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NotExistStorageException.class)
     public void testUpdateError() {
         storage.update(RESUME_4);
     }
