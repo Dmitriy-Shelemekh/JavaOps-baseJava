@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public abstract class AbstractArrayStorageTest {
+public abstract class AbstractStorageTest {
 
     private Storage storage;
     private static final Resume RESUME_1 = new Resume("uuid1");
@@ -16,7 +16,7 @@ public abstract class AbstractArrayStorageTest {
     private static final Resume RESUME_3 = new Resume("uuid3");
     private static final Resume RESUME_4 = new Resume("uuid4");
 
-    AbstractArrayStorageTest(Storage storage) {
+    AbstractStorageTest(Storage storage) {
         this.storage = storage;
     }
 
@@ -38,7 +38,7 @@ public abstract class AbstractArrayStorageTest {
     public void testGetAll() {
         Resume[] resumes = storage.getAll();
 
-        Assert.assertEquals("Ошибка при проверке массива", 3, storage.getSize());
+        Assert.assertEquals("Ошибка при проверке массива", 3, storage.size());
         Assert.assertEquals("Ошибка при проверке елемента массива", RESUME_1, resumes[0]);
         Assert.assertEquals("Ошибка при проверке елемента массива", RESUME_2, resumes[1]);
         Assert.assertEquals("Ошибка при проверке елемента массива", RESUME_3, resumes[2]);
@@ -57,7 +57,7 @@ public abstract class AbstractArrayStorageTest {
 
     @Test
     public void testSave() {
-        int size = storage.getSize();
+        int size = storage.size();
         storage.save(RESUME_4);
         assertSize(size + 1);
         assertGet(RESUME_4);
@@ -71,7 +71,7 @@ public abstract class AbstractArrayStorageTest {
     @Test(expected = RuntimeException.class)
     public void testStorageOverflow() {
         try {
-            for (int i = storage.getSize(); i <= AbstractArrayStorage.STORAGE_LIMIT + 1; i++) {
+            for (int i = storage.size(); i <= AbstractArrayStorage.STORAGE_LIMIT + 1; i++) {
                 storage.save(new Resume());
             }
         } catch (StorageException e) {
@@ -117,6 +117,6 @@ public abstract class AbstractArrayStorageTest {
 
     private void assertSize(int size) {
         Assert.assertEquals("Ошибка при проверке колличества элементов",
-                size, storage.getSize());
+                size, storage.size());
     }
 }
