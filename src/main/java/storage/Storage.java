@@ -1,6 +1,5 @@
 package storage;
 
-
 import model.Resume;
 
 public interface Storage {
@@ -17,6 +16,4 @@ public interface Storage {
     Resume[] getAll();
 
     int size();
-
-//    Integer getSearchKey(String uuid);
 }
