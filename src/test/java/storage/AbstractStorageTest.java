@@ -93,7 +93,7 @@ public abstract class AbstractStorageTest {
         storage.get(RESUME_1.getUuid());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NotExistStorageException.class)
     public void testDeleteError() {
         storage.delete(RESUME_4.getUuid());
     }

@@ -34,27 +34,23 @@ public abstract class AbstractStorage implements Storage {
     }
 
     public Resume get(String uuid) {
-        Object searchKey = getSearchKey(uuid);
+        Object searchKey = getExistKey(uuid);
         return doGet(searchKey);
-    }
-
-    private Object getNotExistKey(String uuid) {
-        Object searchKey = getSearchKey(uuid);
-
-        if (isExist(searchKey)) {
-            throw new NotExistStorageException(uuid);
-        }
-
-        return searchKey;
     }
 
     private Object getExistKey(String uuid) {
         Object searchKey = getSearchKey(uuid);
-
         if (!isExist(searchKey)) {
+            throw new NotExistStorageException(uuid);
+        }
+        return searchKey;
+    }
+
+    private Object getNotExistKey(String uuid) {
+        Object searchKey = getSearchKey(uuid);
+        if (isExist(searchKey)) {
             throw new ExistStorageException(uuid);
         }
-
         return searchKey;
     }
 }
