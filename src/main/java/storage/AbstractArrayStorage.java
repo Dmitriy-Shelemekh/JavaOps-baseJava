@@ -11,7 +11,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
     protected int size = 0;
 
-    public int size() {
+    public int getSize() {
         return size;
     }
 
@@ -25,7 +25,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         storage[(Integer) index] = r;
     }
 
-    public Resume[] getAll() {
+    public Resume[] getAllResumes() {
         return Arrays.copyOfRange(storage, 0, size);
     }
 
@@ -59,5 +59,5 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
     protected abstract void insertElement(Resume r, int index);
 
-    protected abstract Integer getSearchKey(String uuid);
+    protected abstract Integer getElementIndex(String uuid);
 }

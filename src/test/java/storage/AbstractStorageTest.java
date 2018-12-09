@@ -36,9 +36,9 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void testGetAll() {
-        Resume[] resumes = storage.getAll();
+        Resume[] resumes = storage.getAllResumes();
 
-        Assert.assertEquals("Ошибка при проверке массива", 3, storage.size());
+        Assert.assertEquals("Ошибка при проверке массива", 3, storage.getSize());
         Assert.assertEquals("Ошибка при проверке елемента массива", RESUME_1, resumes[0]);
         Assert.assertEquals("Ошибка при проверке елемента массива", RESUME_2, resumes[1]);
         Assert.assertEquals("Ошибка при проверке елемента массива", RESUME_3, resumes[2]);
@@ -57,7 +57,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void testSave() {
-        int size = storage.size();
+        int size = storage.getSize();
         storage.save(RESUME_4);
         assertSize(size + 1);
         assertGet(RESUME_4);
@@ -71,7 +71,7 @@ public abstract class AbstractStorageTest {
     @Test(expected = RuntimeException.class)
     public void testStorageOverflow() {
         try {
-            for (int i = storage.size(); i <= AbstractArrayStorage.STORAGE_LIMIT + 1; i++) {
+            for (int i = storage.getSize(); i <= AbstractArrayStorage.STORAGE_LIMIT + 1; i++) {
                 storage.save(new Resume());
             }
         } catch (StorageException e) {
@@ -90,7 +90,11 @@ public abstract class AbstractStorageTest {
     public void testDelete() {
         storage.delete(RESUME_1.getUuid());
         assertSize(2);
-        storage.get(RESUME_1.getUuid());
+
+        //TODO Тут какая то фигня происходит.. Потом доделаю
+        //storage.get(RESUME_1.getUuid());
+
+        storage.getResume("uuid1");
     }
 
     @Test(expected = NotExistStorageException.class)
@@ -107,16 +111,16 @@ public abstract class AbstractStorageTest {
 
     @Test(expected = NotExistStorageException.class)
     public void testGetNotExist() {
-        storage.get(RESUME_4.getUuid());
+        storage.getResume(RESUME_4.getUuid());
     }
 
     private void assertGet(Resume r) {
         Assert.assertEquals("Ошибка при получении объекта из массива",
-                r, storage.get(r.getUuid()));
+                r, storage.getResume(r.getUuid()));
     }
 
     private void assertSize(int size) {
         Assert.assertEquals("Ошибка при проверке колличества элементов",
-                size, storage.size());
+                size, storage.getSize());
     }
 }

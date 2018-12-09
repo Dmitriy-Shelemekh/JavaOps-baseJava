@@ -6,7 +6,7 @@ import model.Resume;
 
 public abstract class AbstractStorage implements Storage {
 
-    protected abstract Object getSearchKey(String uuid);
+    protected abstract Object getElementIndex(String uuid);
 
     protected abstract void doUpdate(Resume resume, Object searchKey);
 
@@ -19,38 +19,40 @@ public abstract class AbstractStorage implements Storage {
     protected abstract Resume doGet(Object searchKey);
 
     public void update(Resume resume) {
-        Object searchKey = getExistKey(resume.getUuid());
+        Object searchKey = getExistElementIndex(resume.getUuid());
         doUpdate(resume, searchKey);
     }
 
     public void save(Resume resume) {
-        Object searchKey = getNotExistKey(resume.getUuid());
+        Object searchKey = getNotExistElementIndex(resume.getUuid());
         doSave(resume, searchKey);
     }
 
     public void delete(String uuid) {
-        Object searchKey = getExistKey(uuid);
+        Object searchKey = getExistElementIndex(uuid);
         doDelete(searchKey);
     }
 
-    public Resume get(String uuid) {
-        Object searchKey = getExistKey(uuid);
+    public Resume getResume(String uuid) {
+        Object searchKey = getExistElementIndex(uuid);
         return doGet(searchKey);
     }
 
-    private Object getExistKey(String uuid) {
-        Object searchKey = getSearchKey(uuid);
-        if (!isExist(searchKey)) {
+    private Object getExistElementIndex(String uuid) {
+        Object elementIndex = getElementIndex(uuid);
+        if (!isExist(elementIndex)) {
             throw new NotExistStorageException(uuid);
         }
-        return searchKey;
+
+        return elementIndex;
     }
 
-    private Object getNotExistKey(String uuid) {
-        Object searchKey = getSearchKey(uuid);
-        if (isExist(searchKey)) {
+    private Object getNotExistElementIndex(String uuid) {
+        Object elementIndex = getElementIndex(uuid);
+        if (isExist(elementIndex)) {
             throw new ExistStorageException(uuid);
         }
-        return searchKey;
+
+        return elementIndex;
     }
 }
