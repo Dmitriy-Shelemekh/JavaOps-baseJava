@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class MapStorage extends AbstractStorage {
 
-    private Map<Integer, Resume> map = new HashMap<>();
+    private Map<String, Resume> map = new HashMap<>();
 
     @Override
     protected Integer getElementIndex(String uuid) {
@@ -25,8 +25,8 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doUpdate(Resume r, Object searchKey) {
-        map.put((Integer) searchKey, r);
+    protected void doUpdate(Resume resume, Object searchKey) {
+        map.put(resume.getUuid(), resume);
     }
 
     @Override
@@ -35,8 +35,8 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doSave(Resume r, Object searchKey) {
-        map.put(map.size(), r);
+    protected void doSave(Resume resume, Object searchKey) {
+        map.put(resume.getUuid(), resume);
     }
 
     @Override
