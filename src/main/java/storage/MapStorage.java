@@ -11,17 +11,8 @@ public class MapStorage extends AbstractStorage {
     private Map<String, Resume> map = new HashMap<>();
 
     @Override
-    protected Integer getElementIndex(String uuid) {
-        for (Map.Entry entry : map.entrySet()) {
-            Integer key = (Integer) entry.getKey();
-            Resume value = (Resume) entry.getValue();
-
-            if (value.getUuid().equals(uuid)) {
-                return key;
-            }
-        }
-
-        return -1;
+    protected String getElementIndex(String uuid) {
+        return uuid;
     }
 
     @Override
@@ -31,7 +22,7 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     protected boolean isExist(Object searchKey) {
-        return (Integer) searchKey >= 0;
+        return map.containsKey(searchKey);
     }
 
     @Override

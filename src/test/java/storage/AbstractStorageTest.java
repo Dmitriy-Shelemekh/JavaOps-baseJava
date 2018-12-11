@@ -39,9 +39,9 @@ public abstract class AbstractStorageTest {
         Resume[] resumes = storage.getAllResumes();
 
         Assert.assertEquals("Ошибка при проверке массива", 3, storage.getSize());
-        Assert.assertEquals("Ошибка при проверке елемента массива", RESUME_1, resumes[0]);
-        Assert.assertEquals("Ошибка при проверке елемента массива", RESUME_2, resumes[1]);
-        Assert.assertEquals("Ошибка при проверке елемента массива", RESUME_3, resumes[2]);
+        Assert.assertTrue("Ошибка при проверке елемента массива", isResumeExist(RESUME_1, resumes));
+        Assert.assertTrue("Ошибка при проверке елемента массива", isResumeExist(RESUME_2, resumes));
+        Assert.assertTrue("Ошибка при проверке елемента массива", isResumeExist(RESUME_3, resumes));
     }
 
     @Test
@@ -90,11 +90,7 @@ public abstract class AbstractStorageTest {
     public void testDelete() {
         storage.delete(RESUME_1.getUuid());
         assertSize(2);
-
-        //TODO Тут какая то фигня происходит.. Потом доделаю
-        //storage.get(RESUME_1.getUuid());
-
-        storage.getResume("uuid1");
+        storage.getResume(RESUME_1.getUuid());
     }
 
     @Test(expected = NotExistStorageException.class)
@@ -122,5 +118,15 @@ public abstract class AbstractStorageTest {
     private void assertSize(int size) {
         Assert.assertEquals("Ошибка при проверке колличества элементов",
                 size, storage.getSize());
+    }
+
+    private boolean isResumeExist(Resume resume, Resume[] resumes) {
+        for (Resume r : resumes) {
+            if (r.equals(resume)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
