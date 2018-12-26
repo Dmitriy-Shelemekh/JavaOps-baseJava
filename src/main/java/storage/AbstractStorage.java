@@ -1,7 +1,7 @@
 package storage;
 
-import exception.ExistStorageException;
-import exception.NotExistStorageException;
+import exception.StorageExistException;
+import exception.StorageNotExistException;
 import model.Resume;
 
 public abstract class AbstractStorage implements Storage {
@@ -41,7 +41,7 @@ public abstract class AbstractStorage implements Storage {
     private Object getExistElementIndex(String uuid) {
         Object elementIndex = getElementIndex(uuid);
         if (!isExist(elementIndex)) {
-            throw new NotExistStorageException(uuid);
+            throw new StorageNotExistException(uuid);
         }
 
         return elementIndex;
@@ -50,7 +50,7 @@ public abstract class AbstractStorage implements Storage {
     private Object getNotExistElementIndex(String uuid) {
         Object elementIndex = getElementIndex(uuid);
         if (isExist(elementIndex)) {
-            throw new ExistStorageException(uuid);
+            throw new StorageExistException(uuid);
         }
 
         return elementIndex;

@@ -1,6 +1,6 @@
 package storage;
 
-import exception.StorageException;
+import exception.StorageOverflowException;
 import model.Resume;
 
 import java.util.Arrays;
@@ -32,7 +32,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     @Override
     protected void doSave(Resume r, Object index) {
         if (size == STORAGE_LIMIT) {
-            throw new StorageException("Storage overflow", r.getUuid());
+            throw new StorageOverflowException(r.getUuid());
         } else {
             insertElement(r, (Integer) index);
             size++;
