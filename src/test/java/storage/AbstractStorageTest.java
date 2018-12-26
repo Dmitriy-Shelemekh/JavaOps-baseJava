@@ -1,8 +1,7 @@
 package storage;
 
-import exception.ExistStorageException;
-import exception.NotExistStorageException;
-import exception.StorageException;
+import exception.StorageExistException;
+import exception.StorageNotExistException;
 import model.Resume;
 import org.junit.Assert;
 import org.junit.Before;
@@ -10,11 +9,11 @@ import org.junit.Test;
 
 public abstract class AbstractStorageTest {
 
-    private Storage storage;
     private static final Resume RESUME_1 = new Resume("uuid1");
     private static final Resume RESUME_2 = new Resume("uuid2");
     private static final Resume RESUME_3 = new Resume("uuid3");
     private static final Resume RESUME_4 = new Resume("uuid4");
+    protected Storage storage;
 
     AbstractStorageTest(Storage storage) {
         this.storage = storage;
@@ -50,7 +49,7 @@ public abstract class AbstractStorageTest {
         assertGet(RESUME_1);
     }
 
-    @Test(expected = NotExistStorageException.class)
+    @Test(expected = StorageNotExistException.class)
     public void testUpdateError() {
         storage.update(RESUME_4);
     }
@@ -63,21 +62,9 @@ public abstract class AbstractStorageTest {
         assertGet(RESUME_4);
     }
 
-    @Test(expected = ExistStorageException.class)
+    @Test(expected = StorageExistException.class)
     public void testSaveAlreadyExist() {
         storage.save(RESUME_1);
-    }
-
-    @Test(expected = StorageException.class)
-    public void testStorageOverflow() {
-        try {
-            for (int i = storage.getSize(); i <= AbstractArrayStorage.STORAGE_LIMIT + 1; i++) {
-                storage.save(new Resume());
-            }
-        } catch (StorageException e) {
-            Assert.fail("Ошибка: " + e);
-        }
-        storage.save(new Resume("Overflowed"));
     }
 
     @Test
@@ -86,14 +73,14 @@ public abstract class AbstractStorageTest {
         assertSize(0);
     }
 
-    @Test(expected = NotExistStorageException.class)
+    @Test(expected = StorageNotExistException.class)
     public void testDelete() {
         storage.delete(RESUME_1.getUuid());
         assertSize(2);
         storage.getResume(RESUME_1.getUuid());
     }
 
-    @Test(expected = NotExistStorageException.class)
+    @Test(expected = StorageNotExistException.class)
     public void testDeleteError() {
         storage.delete(RESUME_4.getUuid());
     }
@@ -105,7 +92,7 @@ public abstract class AbstractStorageTest {
         assertGet(RESUME_3);
     }
 
-    @Test(expected = NotExistStorageException.class)
+    @Test(expected = StorageNotExistException.class)
     public void testGetNotExist() {
         storage.getResume(RESUME_4.getUuid());
     }
