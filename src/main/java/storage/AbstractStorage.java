@@ -6,7 +6,7 @@ import model.Resume;
 
 public abstract class AbstractStorage implements Storage {
 
-    protected abstract Object getElementIndex(String uuid);
+    protected abstract Object getElementSearchKey(String uuid);
 
     protected abstract void doUpdate(Resume resume, Object searchKey);
 
@@ -19,40 +19,40 @@ public abstract class AbstractStorage implements Storage {
     protected abstract Resume doGet(Object searchKey);
 
     public void update(Resume resume) {
-        Object searchKey = getExistElementIndex(resume.getUuid());
+        Object searchKey = getExistElementSearchKey(resume.getUuid());
         doUpdate(resume, searchKey);
     }
 
     public void save(Resume resume) {
-        Object searchKey = getNotExistElementIndex(resume.getUuid());
+        Object searchKey = getNotExistElementSearchKey(resume.getUuid());
         doSave(resume, searchKey);
     }
 
     public void delete(String uuid) {
-        Object searchKey = getExistElementIndex(uuid);
+        Object searchKey = getExistElementSearchKey(uuid);
         doDelete(searchKey);
     }
 
     public Resume getResume(String uuid) {
-        Object searchKey = getExistElementIndex(uuid);
+        Object searchKey = getExistElementSearchKey(uuid);
         return doGet(searchKey);
     }
 
-    private Object getExistElementIndex(String uuid) {
-        Object elementIndex = getElementIndex(uuid);
-        if (!isExist(elementIndex)) {
+    private Object getExistElementSearchKey(String uuid) {
+        Object elementSearchKey = getElementSearchKey(uuid);
+        if (!isExist(elementSearchKey)) {
             throw new StorageNotExistException(uuid);
         }
 
-        return elementIndex;
+        return elementSearchKey;
     }
 
-    private Object getNotExistElementIndex(String uuid) {
-        Object elementIndex = getElementIndex(uuid);
-        if (isExist(elementIndex)) {
+    private Object getNotExistElementSearchKey(String uuid) {
+        Object elementSearchKey = getElementSearchKey(uuid);
+        if (isExist(elementSearchKey)) {
             throw new StorageExistException(uuid);
         }
 
-        return elementIndex;
+        return elementSearchKey;
     }
 }

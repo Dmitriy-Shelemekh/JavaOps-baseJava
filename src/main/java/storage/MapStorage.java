@@ -11,7 +11,7 @@ public class MapStorage extends AbstractStorage {
     private Map<String, Resume> map = new HashMap<>();
 
     @Override
-    protected String getElementIndex(String uuid) {
+    protected String getElementSearchKey(String uuid) {
         return uuid;
     }
 
