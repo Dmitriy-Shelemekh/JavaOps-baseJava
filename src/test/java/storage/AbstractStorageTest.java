@@ -3,9 +3,11 @@ package storage;
 import exception.StorageExistException;
 import exception.StorageNotExistException;
 import model.Resume;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractStorageTest {
 
@@ -37,10 +39,10 @@ public abstract class AbstractStorageTest {
     public void testGetAll() {
         Resume[] resumes = storage.getAllResumes();
 
-        Assert.assertEquals("Ошибка при проверке массива", 3, storage.getSize());
-        Assert.assertTrue("Ошибка при проверке елемента массива", isResumeExist(RESUME_1, resumes));
-        Assert.assertTrue("Ошибка при проверке елемента массива", isResumeExist(RESUME_2, resumes));
-        Assert.assertTrue("Ошибка при проверке елемента массива", isResumeExist(RESUME_3, resumes));
+        assertEquals("Ошибка при проверке массива", 3, storage.getSize());
+        assertTrue("Ошибка при проверке елемента массива", isResumeExist(RESUME_1, resumes));
+        assertTrue("Ошибка при проверке елемента массива", isResumeExist(RESUME_2, resumes));
+        assertTrue("Ошибка при проверке елемента массива", isResumeExist(RESUME_3, resumes));
     }
 
     @Test
@@ -75,8 +77,9 @@ public abstract class AbstractStorageTest {
 
     @Test(expected = StorageNotExistException.class)
     public void testDelete() {
+        int size = storage.getSize();
         storage.delete(RESUME_1.getUuid());
-        assertSize(2);
+        assertSize(size - 1);
         storage.getResume(RESUME_1.getUuid());
     }
 
@@ -98,12 +101,12 @@ public abstract class AbstractStorageTest {
     }
 
     private void assertGet(Resume resume) {
-        Assert.assertEquals("Ошибка при получении объекта из массива",
+        assertEquals("Ошибка при получении объекта из массива",
                 resume, storage.getResume(resume.getUuid()));
     }
 
     private void assertSize(int size) {
-        Assert.assertEquals("Ошибка при проверке колличества элементов",
+        assertEquals("Ошибка при проверке колличества элементов",
                 size, storage.getSize());
     }
 
