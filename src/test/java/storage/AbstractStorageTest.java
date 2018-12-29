@@ -97,9 +97,9 @@ public abstract class AbstractStorageTest {
         storage.getResume(RESUME_4.getUuid());
     }
 
-    private void assertGet(Resume r) {
+    private void assertGet(Resume resume) {
         Assert.assertEquals("Ошибка при получении объекта из массива",
-                r, storage.getResume(r.getUuid()));
+                resume, storage.getResume(resume.getUuid()));
     }
 
     private void assertSize(int size) {
@@ -107,9 +107,9 @@ public abstract class AbstractStorageTest {
                 size, storage.getSize());
     }
 
-    private boolean isResumeExist(Resume resume, Resume[] resumes) {
-        for (Resume r : resumes) {
-            if (r.equals(resume)) {
+    private boolean isResumeExist(Resume searchResume, Resume[] resumes) {
+        for (Resume resume : resumes) {
+            if (resume.equals(searchResume)) {
                 return true;
             }
         }

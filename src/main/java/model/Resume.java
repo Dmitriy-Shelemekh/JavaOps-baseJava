@@ -2,20 +2,15 @@ package model;
 
 public class Resume implements Comparable<Resume> {
     private String uuid;
-
     private String fullName;
+
+    public Resume(String uuid) {
+        this(uuid, "Default Name");
+    }
 
     public Resume(String uuid, String fullName) {
         this.uuid = uuid;
         this.fullName = fullName;
-    }
-
-    public Resume(String uuid) {
-        this.uuid = uuid;
-    }
-
-    public Resume() {
-
     }
 
     public String getFullName() {
@@ -55,8 +50,8 @@ public class Resume implements Comparable<Resume> {
     }
 
     @Override
-    public int compareTo(Resume r) {
-        return this.uuid.compareToIgnoreCase(r.uuid);
+    public int compareTo(Resume resume) {
+        return this.uuid.compareToIgnoreCase(resume.uuid);
     }
 
     @Override
