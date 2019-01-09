@@ -17,10 +17,10 @@ public abstract class AbstractStorageTest {
     private static final String resume_3Uuid = "uuid3";
     private static final String resume_4Uuid = "uuid4";
 
-    private static final Resume RESUME_1 = new Resume("uuid1");
-    private static final Resume RESUME_2 = new Resume("uuid2");
-    private static final Resume RESUME_3 = new Resume("uuid3");
-    private static final Resume RESUME_4 = new Resume("uuid4");
+    private static final Resume RESUME_1 = new Resume("uuid1", "uuid1-full name");
+    private static final Resume RESUME_2 = new Resume("uuid2", "uuid2-full name");
+    private static final Resume RESUME_3 = new Resume("uuid3", "uuid3-full name");
+    private static final Resume RESUME_4 = new Resume("uuid4", "uuid4-full name");
 
     AbstractStorageTest(Storage storage) {
         this.storage = storage;

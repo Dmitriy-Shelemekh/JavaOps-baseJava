@@ -19,6 +19,7 @@ public class MainArray {
                 continue;
             }
             String uuid = null;
+            String fullName = uuid + "-Full Name";
             if (params.length == 2) {
                 uuid = params[1].intern();
             }
@@ -30,7 +31,7 @@ public class MainArray {
                     System.out.println(ARRAY_STORAGE.getSize());
                     break;
                 case "save":
-                    resume = new Resume(uuid);
+                    resume = new Resume(uuid, fullName);
                     ARRAY_STORAGE.save(resume);
                     printAll();
                     break;
