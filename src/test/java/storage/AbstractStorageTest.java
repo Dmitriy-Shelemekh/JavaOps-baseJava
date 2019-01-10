@@ -12,15 +12,15 @@ import static org.junit.Assert.assertTrue;
 public abstract class AbstractStorageTest {
     protected Storage storage;
 
-    private static final String resume_1Uuid = "uuid1";
-    private static final String resume_2Uuid = "uuid2";
-    private static final String resume_3Uuid = "uuid3";
-    private static final String resume_4Uuid = "uuid4";
+    private static final String uuid1 = "uuid1";
+    private static final String uuid2 = "uuid2";
+    private static final String uuid3 = "uuid3";
+    private static final String uuid4 = "uuid4";
 
-    private static final Resume RESUME_1 = new Resume("uuid1", "uuid1-full name");
-    private static final Resume RESUME_2 = new Resume("uuid2", "uuid2-full name");
-    private static final Resume RESUME_3 = new Resume("uuid3", "uuid3-full name");
-    private static final Resume RESUME_4 = new Resume("uuid4", "uuid4-full name");
+    private static final Resume RESUME_1 = new Resume(uuid1, "Resume-1");
+    private static final Resume RESUME_2 = new Resume(uuid2, "Resume-2");
+    private static final Resume RESUME_3 = new Resume(uuid3, "Resume-3");
+    private static final Resume RESUME_4 = new Resume(uuid4, "Resume-4");
 
     AbstractStorageTest(Storage storage) {
         this.storage = storage;
@@ -83,14 +83,14 @@ public abstract class AbstractStorageTest {
     @Test(expected = StorageNotExistException.class)
     public void testDelete() {
         int size = storage.getSize();
-        storage.delete(resume_1Uuid);
+        storage.delete(uuid1);
         assertSize(size - 1);
-        storage.getResume(resume_1Uuid);
+        storage.getResume(uuid1);
     }
 
     @Test(expected = StorageNotExistException.class)
     public void testDeleteError() {
-        storage.delete(resume_4Uuid);
+        storage.delete(RESUME_4.getUuid());
     }
 
     @Test
@@ -102,7 +102,7 @@ public abstract class AbstractStorageTest {
 
     @Test(expected = StorageNotExistException.class)
     public void testGetNotExist() {
-        storage.getResume(resume_4Uuid);
+        storage.getResume(uuid4);
     }
 
     private void assertGet(Resume resume) {
