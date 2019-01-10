@@ -3,8 +3,8 @@ package model;
 import java.util.UUID;
 
 public class Resume implements Comparable<Resume> {
-    private String uuid;
-    private String fullName;
+    private final String uuid;
+    private final String fullName;
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
@@ -12,7 +12,7 @@ public class Resume implements Comparable<Resume> {
 
     public Resume(String uuid, String fullName) {
         if (uuid == null || fullName == null) {
-            throw new NullPointerException("Uuid/fullName must be not null");
+            throw new NullPointerException("Uuid/fullName must be not null!");
         }
 
         this.uuid = uuid;
@@ -23,21 +23,21 @@ public class Resume implements Comparable<Resume> {
         return fullName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+//    public void setFullName(String fullName) {
+//        this.fullName = fullName;
+//    }
 
     public String getUuid() {
         return uuid;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
+//    public void setUuid(String uuid) {
+//        this.uuid = uuid;
+//    }
 
     @Override
     public int hashCode() {
-        return uuid.hashCode();
+        return uuid.hashCode() + fullName.hashCode();
     }
 
     @Override
@@ -52,16 +52,21 @@ public class Resume implements Comparable<Resume> {
 
         Resume resume = (Resume) o;
 
-        return uuid.equals(resume.uuid);
+        if (!uuid.equals(resume.uuid)) {
+            return false;
+        }
+
+        return fullName.equals(resume.fullName);
     }
 
     @Override
     public int compareTo(Resume resume) {
-        return this.uuid.compareToIgnoreCase(resume.uuid);
+        int result = fullName.compareTo(resume.fullName);
+        return result != 0 ? result : uuid.compareTo(resume.uuid);
     }
 
     @Override
     public String toString() {
-        return uuid;
+        return uuid + " " + fullName;
     }
 }
