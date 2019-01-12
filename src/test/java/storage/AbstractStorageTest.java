@@ -42,7 +42,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void testGetAll() {
-        Resume[] resumes = storage.getAllResumes();
+        Resume[] resumes = storage.getAllResumes().toArray(new Resume[0]);
 
         assertEquals("Ошибка при проверке массива", 3, storage.getSize());
         assertTrue("Ошибка при проверке елемента массива", isResumeExist(RESUME_1, resumes));

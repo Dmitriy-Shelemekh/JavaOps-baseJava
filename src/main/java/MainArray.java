@@ -56,7 +56,7 @@ public class MainArray {
     }
 
     private static void printAll() {
-        Resume[] all = ARRAY_STORAGE.getAllResumes();
+        Resume[] all = ARRAY_STORAGE.getAllResumes().toArray(new Resume[0]);
         System.out.println("----------------------------");
         if (all.length == 0) {
             System.out.println("Empty");

@@ -4,6 +4,7 @@ import exception.StorageOverflowException;
 import model.Resume;
 
 import java.util.Arrays;
+import java.util.List;
 
 public abstract class AbstractArrayStorage extends AbstractStorage {
     protected static final int STORAGE_LIMIT = 10000;
@@ -25,8 +26,8 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         storage[(Integer) index] = resume;
     }
 
-    public Resume[] getAllResumes() {
-        return Arrays.copyOfRange(storage, 0, size);
+    public List<Resume> getAllResumes() {
+        return Arrays.asList(storage);
     }
 
     @Override
