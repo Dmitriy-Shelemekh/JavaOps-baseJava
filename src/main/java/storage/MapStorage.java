@@ -39,19 +39,6 @@ public class MapStorage extends AbstractStorage {
     @Override
     protected void doDelete(Object searchKey) {
         map.remove(searchKey);
-
-        //TODO Переделать этот медот по нормальному
-        //Resume toDelete = map.get(searchKey);
-        //Resume last = map.get(map.size() - 1);
-        //map.get(searchKey).setUuid(last.getUuid());
-        //map.remove(map.size() - 1);
-        //Iterator itr = map.entrySet().iterator();
-        //while(itr.hasNext()) {
-        //    map.put("newKey", map.remove("oldKey"));
-        //}
-        //if ((Integer) searchKey < map.size() - 1) {
-        //    map.put("newKey", map.remove("oldKey"));
-        //}
     }
 
     @Override

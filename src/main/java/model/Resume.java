@@ -23,17 +23,9 @@ public class Resume implements Comparable<Resume> {
         return fullName;
     }
 
-//    public void setFullName(String fullName) {
-//        this.fullName = fullName;
-//    }
-
     public String getUuid() {
         return uuid;
     }
-
-//    public void setUuid(String uuid) {
-//        this.uuid = uuid;
-//    }
 
     @Override
     public int hashCode() {
