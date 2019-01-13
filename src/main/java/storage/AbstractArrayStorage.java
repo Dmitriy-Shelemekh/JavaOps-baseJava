@@ -5,6 +5,8 @@ import model.Resume;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public abstract class AbstractArrayStorage extends AbstractStorage {
     protected static final int STORAGE_LIMIT = 10000;
@@ -27,7 +29,13 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     public List<Resume> getAllResumes() {
-        return Arrays.asList(storage);
+        List<Resume> allResumes = Arrays.asList(storage);
+
+        List<Resume> result = allResumes.stream()
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+
+        return result;
     }
 
     @Override

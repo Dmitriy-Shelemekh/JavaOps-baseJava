@@ -77,9 +77,7 @@ public class MainArray {
             System.out.println("Empty");
         } else {
             for (Resume resume : all) {
-                if (resume != null) {
                     System.out.println(resume);
-                }
             }
         }
 
