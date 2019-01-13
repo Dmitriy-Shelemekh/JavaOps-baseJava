@@ -88,6 +88,13 @@ public abstract class AbstractStorageTest {
         storage.getResume(uuid1);
     }
 
+    @Test()
+    public void testSuccessDelete() {
+        int size = storage.getSize();
+        storage.delete(uuid1);
+        assertSize(size - 1);
+    }
+
     @Test(expected = StorageNotExistException.class)
     public void testDeleteError() {
         storage.delete(RESUME_4.getUuid());
