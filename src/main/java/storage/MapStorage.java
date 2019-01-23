@@ -12,7 +12,7 @@ public class MapStorage extends AbstractStorage {
     private Map<String, Resume> map = new HashMap<>();
 
     @Override
-    protected String getElementSearchKey(String uuid) {
+    protected String getSearchKey(String uuid) {
         return uuid;
     }
 

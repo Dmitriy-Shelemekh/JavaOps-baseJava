@@ -6,7 +6,7 @@ import model.Resume;
 
 public abstract class AbstractStorage implements Storage {
 
-    protected abstract Object getElementSearchKey(String uuid);
+    protected abstract Object getSearchKey(String uuid);
 
     protected abstract void doUpdate(Resume resume, Object searchKey);
 
@@ -19,36 +19,36 @@ public abstract class AbstractStorage implements Storage {
     protected abstract Resume doGet(Object searchKey);
 
     public void update(Resume resume) {
-        Object searchKey = getExistElementSearchKey(resume.getUuid());
+        Object searchKey = getExistSearchKey(resume.getUuid());
         doUpdate(resume, searchKey);
     }
 
     public void save(Resume resume) {
-        Object searchKey = getNotExistElementSearchKey(resume.getUuid());
+        Object searchKey = getNotExistSearchKey(resume.getUuid());
         doSave(resume, searchKey);
     }
 
     public void delete(String uuid) {
-        Object searchKey = getExistElementSearchKey(uuid);
+        Object searchKey = getExistSearchKey(uuid);
         doDelete(searchKey);
     }
 
     public Resume getResume(String uuid) {
-        Object searchKey = getExistElementSearchKey(uuid);
+        Object searchKey = getExistSearchKey(uuid);
         return doGet(searchKey);
     }
 
-    private Object getExistElementSearchKey(String uuid) {
-        Object elementSearchKey = getElementSearchKey(uuid);
-        if (!isExist(elementSearchKey)) {
+    private Object getExistSearchKey(String uuid) {
+        Object searchKey = getSearchKey(uuid);
+        if (!isExist(searchKey)) {
             throw new StorageNotExistException(uuid);
         }
 
-        return elementSearchKey;
+        return searchKey;
     }
 
-    private Object getNotExistElementSearchKey(String uuid) {
-        Object elementSearchKey = getElementSearchKey(uuid);
+    private Object getNotExistSearchKey(String uuid) {
+        Object elementSearchKey = getSearchKey(uuid);
         if (isExist(elementSearchKey)) {
             throw new StorageExistException(uuid);
         }
