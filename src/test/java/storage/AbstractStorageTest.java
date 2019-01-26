@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractStorageTest {
     protected Storage storage;
@@ -55,8 +56,10 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void testUpdate() {
-        storage.update(RESUME_1);
-        assertGet(RESUME_1);
+        Resume newResume = new Resume(UUID_1, "New Name");
+        storage.update(newResume);
+        assertTrue("Ошибка обновлении элемента массива",
+                newResume == storage.getResume(UUID_1));
     }
 
     @Test(expected = StorageNotExistException.class)
