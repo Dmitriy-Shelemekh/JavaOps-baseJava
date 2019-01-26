@@ -15,6 +15,8 @@ import static org.junit.Assert.assertTrue;
 public abstract class AbstractStorageTest {
     protected Storage storage;
 
+    private int size = 3;
+
     private static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";
     private static final String UUID_3 = "uuid3";
@@ -49,7 +51,7 @@ public abstract class AbstractStorageTest {
         List<Resume> expectedList = Arrays.asList(RESUME_1, RESUME_2, RESUME_3);
 
         assertEquals("Ошибка при проверке размера массива",
-                3, list.size());
+                size, list.size());
         assertEquals("Ошибка при проверке елементов массива",
                 list, expectedList);
     }
@@ -69,7 +71,6 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void testSave() {
-        int size = storage.getSize();
         storage.save(RESUME_4);
         assertSize(size + 1);
         assertGet(RESUME_4);
@@ -88,7 +89,6 @@ public abstract class AbstractStorageTest {
 
     @Test(expected = StorageNotExistException.class)
     public void testDelete() {
-        int size = storage.getSize();
         storage.delete(UUID_1);
         assertSize(size - 1);
         storage.getResume(UUID_1);
@@ -96,7 +96,6 @@ public abstract class AbstractStorageTest {
 
     @Test()
     public void testSuccessDelete() {
-        int size = storage.getSize();
         storage.delete(UUID_1);
         assertSize(size - 1);
     }
