@@ -3,13 +3,13 @@ package storage;
 import model.Resume;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class MapStorage extends AbstractStorage {
 
-    private Map<String, Resume> map = new HashMap<>();
+    private Map<String, Resume> map = new TreeMap<>();
 
     @Override
     protected String getSearchKey(String uuid) {

@@ -6,21 +6,23 @@ import model.Resume;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractStorageTest {
     protected Storage storage;
 
-    private static final String uuid1 = "uuid1";
-    private static final String uuid2 = "uuid2";
-    private static final String uuid3 = "uuid3";
-    private static final String uuid4 = "uuid4";
+    private static final String UUID_1 = "uuid1";
+    private static final String UUID_2 = "uuid2";
+    private static final String UUID_3 = "uuid3";
+    private static final String UUID_4 = "uuid4";
 
-    private static final Resume RESUME_1 = new Resume(uuid1, "Resume-1");
-    private static final Resume RESUME_2 = new Resume(uuid2, "Resume-2");
-    private static final Resume RESUME_3 = new Resume(uuid3, "Resume-3");
-    private static final Resume RESUME_4 = new Resume(uuid4, "Resume-4");
+    private static final Resume RESUME_1 = new Resume(UUID_1, "Resume-1");
+    private static final Resume RESUME_2 = new Resume(UUID_2, "Resume-2");
+    private static final Resume RESUME_3 = new Resume(UUID_3, "Resume-3");
+    private static final Resume RESUME_4 = new Resume(UUID_4, "Resume-4");
 
     AbstractStorageTest(Storage storage) {
         this.storage = storage;
@@ -42,12 +44,13 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void testGetAll() {
-        Resume[] resumes = storage.getAllResumes().toArray(new Resume[0]);
+        List<Resume> list = storage.getAllResumes();
+        List<Resume> expectedList = Arrays.asList(RESUME_1, RESUME_2, RESUME_3);
 
-        assertEquals("Ошибка при проверке массива", 3, storage.getSize());
-        assertTrue("Ошибка при проверке елемента массива", isResumeExist(RESUME_1, resumes));
-        assertTrue("Ошибка при проверке елемента массива", isResumeExist(RESUME_2, resumes));
-        assertTrue("Ошибка при проверке елемента массива", isResumeExist(RESUME_3, resumes));
+        assertEquals("Ошибка при проверке размера массива",
+                3, list.size());
+        assertEquals("Ошибка при проверке елементов массива",
+                list, expectedList);
     }
 
     @Test
@@ -83,15 +86,15 @@ public abstract class AbstractStorageTest {
     @Test(expected = StorageNotExistException.class)
     public void testDelete() {
         int size = storage.getSize();
-        storage.delete(uuid1);
+        storage.delete(UUID_1);
         assertSize(size - 1);
-        storage.getResume(uuid1);
+        storage.getResume(UUID_1);
     }
 
     @Test()
     public void testSuccessDelete() {
         int size = storage.getSize();
-        storage.delete(uuid1);
+        storage.delete(UUID_1);
         assertSize(size - 1);
     }
 
@@ -109,7 +112,7 @@ public abstract class AbstractStorageTest {
 
     @Test(expected = StorageNotExistException.class)
     public void testGetNotExist() {
-        storage.getResume(uuid4);
+        storage.getResume(UUID_4);
     }
 
     private void assertGet(Resume resume) {
@@ -120,15 +123,5 @@ public abstract class AbstractStorageTest {
     private void assertSize(int size) {
         assertEquals("Ошибка при проверке колличества элементов",
                 size, storage.getSize());
-    }
-
-    private boolean isResumeExist(Resume searchResume, Resume[] resumes) {
-        for (Resume resume : resumes) {
-            if (resume.equals(searchResume)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }
