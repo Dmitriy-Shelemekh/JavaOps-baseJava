@@ -102,7 +102,7 @@ public abstract class AbstractStorageTest {
 
     @Test(expected = StorageNotExistException.class)
     public void testDeleteError() {
-        storage.delete(RESUME_4.getUuid());
+        storage.delete(UUID_4);
     }
 
     @Test
