@@ -10,12 +10,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertSame;
 
 public abstract class AbstractStorageTest {
     protected Storage storage;
 
-    private int size = 3;
+    private int sizeBeforeTest;
 
     private static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";
@@ -38,6 +38,8 @@ public abstract class AbstractStorageTest {
         storage.save(RESUME_1);
         storage.save(RESUME_2);
         storage.save(RESUME_3);
+
+        sizeBeforeTest = storage.getSize();
     }
 
     @Test
@@ -51,17 +53,17 @@ public abstract class AbstractStorageTest {
         List<Resume> expectedList = Arrays.asList(RESUME_1, RESUME_2, RESUME_3);
 
         assertEquals("Ошибка при проверке размера массива",
-                size, list.size());
+                sizeBeforeTest, list.size());
         assertEquals("Ошибка при проверке елементов массива",
-                list, expectedList);
+                expectedList, list);
     }
 
     @Test
     public void testUpdate() {
         Resume newResume = new Resume(UUID_1, "New Name");
         storage.update(newResume);
-        assertTrue("Ошибка обновлении элемента массива",
-                newResume == storage.getResume(UUID_1));
+        assertSame("Ошибка обновлении элемента массива",
+                newResume, storage.getResume(UUID_1));
     }
 
     @Test(expected = StorageNotExistException.class)
@@ -72,7 +74,7 @@ public abstract class AbstractStorageTest {
     @Test
     public void testSave() {
         storage.save(RESUME_4);
-        assertSize(size + 1);
+        assertSize(sizeBeforeTest + 1);
         assertGet(RESUME_4);
     }
 
@@ -90,14 +92,14 @@ public abstract class AbstractStorageTest {
     @Test(expected = StorageNotExistException.class)
     public void testDelete() {
         storage.delete(UUID_1);
-        assertSize(size - 1);
+        assertSize(sizeBeforeTest - 1);
         storage.getResume(UUID_1);
     }
 
     @Test()
     public void testSuccessDelete() {
         storage.delete(UUID_1);
-        assertSize(size - 1);
+        assertSize(sizeBeforeTest - 1);
     }
 
     @Test(expected = StorageNotExistException.class)
