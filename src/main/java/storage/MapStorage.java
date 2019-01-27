@@ -2,14 +2,11 @@ package storage;
 
 import model.Resume;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class MapStorage extends AbstractStorage {
 
-    private Map<String, Resume> map = new TreeMap<>();
+    private Map<String, Resume> map = new HashMap<>();
 
     @Override
     protected String getSearchKey(String uuid) {
@@ -48,7 +45,9 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     public List<Resume> getAllResumes() {
-        return new ArrayList<>(map.values());
+        List<Resume> result = new ArrayList<>(map.values());
+        Collections.sort(result);
+        return result;
     }
 
     @Override
