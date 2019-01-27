@@ -1,22 +1,34 @@
 package model;
 
+import java.util.EnumMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
 public class Resume implements Comparable<Resume> {
     private final String uuid;
     private final String fullName;
+    private final Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
+    private final Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
     }
 
     public Resume(String uuid, String fullName) {
-        Objects.requireNonNull(uuid, "uuid must be not null!");
-        Objects.requireNonNull(fullName, "fullName must be not null!");
+        Objects.requireNonNull(uuid, "Uuid must be not null");
+        Objects.requireNonNull(fullName, "FullName must be not null");
 
         this.uuid = uuid;
         this.fullName = fullName;
+    }
+
+    public String getContact(ContactType type) {
+        return contacts.get(type);
+    }
+
+    public Section getSection(SectionType type) {
+        return sections.get(type);
     }
 
     public String getFullName() {
