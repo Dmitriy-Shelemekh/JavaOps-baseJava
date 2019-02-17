@@ -5,7 +5,6 @@ import java.util.Objects;
 
 public class Organization {
     private final Link homePage;
-
     private final LocalDate startDate;
     private final LocalDate endDate;
     private final String title;

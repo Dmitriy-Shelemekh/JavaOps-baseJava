@@ -1,7 +1,10 @@
 package model;
 
+import lombok.Data;
+
 import java.util.Objects;
 
+@Data
 public class Link {
     private final String name;
     private final String url;
@@ -10,14 +13,6 @@ public class Link {
         Objects.requireNonNull(name, "Name must be not null");
         this.name = name;
         this.url = url;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getUrl() {
-        return url;
     }
 
     @Override
