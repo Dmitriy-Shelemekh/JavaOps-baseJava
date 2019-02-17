@@ -8,13 +8,13 @@ public enum ContactType {
     GITHUB("Профиль GitHub"),
     HOME_PAGE("Домашняя страница");
 
-    private final String name;
+    private final String value;
 
-    ContactType(String name) {
-        this.name = name;
+    ContactType(String value) {
+        this.value = value;
     }
 
-    public String getName() {
-        return name;
+    public String getValue() {
+        return value;
     }
 }
