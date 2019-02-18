@@ -2,7 +2,10 @@ package model;
 
 import lombok.Data;
 
-import java.util.*;
+import java.util.EnumMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
 
 @Data
 public class Resume implements Comparable<Resume> {
@@ -10,7 +13,7 @@ public class Resume implements Comparable<Resume> {
     private final String fullName;
     private final Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
     private final Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
-    private List<Contract> contracts;
+    private Map<ContactType, Object> contracts;
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
