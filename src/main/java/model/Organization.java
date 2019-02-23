@@ -1,8 +1,12 @@
 package model;
 
+import lombok.Getter;
+import utils.Period;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Getter
 public class Organization {
     private final Link homePage;
     private final LocalDate startDate;
@@ -10,13 +14,12 @@ public class Organization {
     private final String title;
     private final String description;
 
-    public Organization(String name, String url, LocalDate startDate, LocalDate endDate, String title, String description) {
-        Objects.requireNonNull(startDate, "StartDate must be not null");
-        Objects.requireNonNull(endDate, "EndDate must be not null");
+    public Organization(Link link, Period period, String title, String description) {
+        Objects.requireNonNull(period, "Period must be not null");
         Objects.requireNonNull(title, "Title must be not null");
-        this.homePage = new Link(name, url);
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.homePage = link;
+        this.startDate = period.getStartDate();
+        this.endDate = period.getEndDate();
         this.title = title;
         this.description = description;
     }
