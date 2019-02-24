@@ -35,23 +35,15 @@ public class ResumeTestData {
         List<Organization> experience = new ArrayList<>(Arrays.asList(
                 new Organization(
                         new Link("Организация 1", "http://organization.one"),
-                        new Period(
-                                LocalDate.of(2011, 10, 1),
-                                LocalDate.of(2012, 10, 1)),
-                        "Заголовок Организация 1",
-                        "Описание Организация 1"),
-                new Organization(new Link("Организация 2", "http://organization.two"),
-                        new Period(
-                                LocalDate.of(2012, 10, 1),
-                                LocalDate.of(2013, 10, 1)),
-                        "Заголовок Организация 2",
-                        "Описание Организация 2"),
-                new Organization(new Link("Организация 3", "http://organization.three"),
-                        new Period(
-                                LocalDate.of(2013, 10, 1),
-                                LocalDate.of(2014, 10, 1)),
-                        "Заголовок Организация 3",
-                        "Описание Организация 3")));
+                        new ArrayList<>(Arrays.asList(
+                                createOrganizationContent(),
+                                createOrganizationContent()))),
+                new Organization(
+                        new Link("Организация 2", "http://organization.two"),
+                        new ArrayList<>(Arrays.asList(
+                                createOrganizationContent(),
+                                createOrganizationContent())))));
+
         List<Organization> education = experience; //TODO Пока просто для теста, потом переписать.
 
         sections.put(OBJECTIVE, new TextSection(objective));
@@ -62,6 +54,15 @@ public class ResumeTestData {
         sections.put(EDUCATION, new OrganizationSection(education));
 
         return sections;
+    }
+
+    private static OrganizationContent createOrganizationContent() {
+        return new OrganizationContent(
+                new Period(
+                        LocalDate.of(2011, 10, 1),
+                        LocalDate.of(2012, 10, 1)),
+                "Заголовок внутреннего блока Организация",
+                "Описание внутреннего блока Организация");
     }
 
     private static Map<ContactType, Object> getFillContracts() {
