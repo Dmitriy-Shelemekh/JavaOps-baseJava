@@ -1,18 +1,22 @@
 package model;
 
+import lombok.Getter;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+@Getter
 public class ListSection extends Section {
     private final List<String> items;
+
+    public ListSection(String... items) {
+        this(Arrays.asList(items));
+    }
 
     public ListSection(List<String> items) {
         Objects.requireNonNull(items, "Items must be not null");
         this.items = items;
-    }
-
-    public List<String> getItems() {
-        return items;
     }
 
     @Override

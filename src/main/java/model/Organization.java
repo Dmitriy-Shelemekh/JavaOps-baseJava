@@ -2,6 +2,7 @@ package model;
 
 import lombok.Getter;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,6 +10,10 @@ import java.util.Objects;
 public class Organization {
     private final Link homePage;
     private final List<OrganizationContent> content;
+
+    public Organization(Link link, OrganizationContent... contents) {
+        this(link, Arrays.asList(contents));
+    }
 
     public Organization(Link link, List<OrganizationContent> content) {
         this.homePage = link;
