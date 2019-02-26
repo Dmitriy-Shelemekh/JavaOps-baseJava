@@ -1,5 +1,8 @@
 package model;
 
+import lombok.Getter;
+
+@Getter
 public enum SectionType {
     PERSONAL("Личные качества"),
     OBJECTIVE("Позиция"),
@@ -8,7 +11,7 @@ public enum SectionType {
     EXPERIENCE("Опыт работы"),
     EDUCATION("Образование");
 
-    String name;
+    private String name;
 
     SectionType(String name) {
         this.name = name;
