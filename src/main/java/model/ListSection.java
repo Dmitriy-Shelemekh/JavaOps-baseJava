@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
-public class ListSection extends Section {
+public class ListSection extends AbstractSection {
     private final List<String> items;
 
     public ListSection(String... items) {

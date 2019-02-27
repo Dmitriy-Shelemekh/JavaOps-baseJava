@@ -12,7 +12,7 @@ public class Resume implements Comparable<Resume> {
     private final String uuid;
     private final String fullName;
     private Map<ContactType, Object> contacts = new EnumMap<>(ContactType.class);
-    private Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
+    private Map<SectionType, AbstractSection> sections = new EnumMap<>(SectionType.class);
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);

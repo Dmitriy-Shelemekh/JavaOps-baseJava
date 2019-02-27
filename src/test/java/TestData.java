@@ -22,8 +22,8 @@ public class TestData {
         return resume;
     }
 
-    public static Map<SectionType, Section> createSections() {
-        Map<SectionType, Section> sections = new HashMap<>();
+    public static Map<SectionType, AbstractSection> createSections() {
+        Map<SectionType, AbstractSection> sections = new HashMap<>();
 
         sections.put(OBJECTIVE, new TextSection(OBJECTIVE_CONTENT));
         sections.put(PERSONAL, new TextSection(PERSONAL_CONTENT));
