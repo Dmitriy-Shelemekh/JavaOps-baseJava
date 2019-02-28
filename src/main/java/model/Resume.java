@@ -1,13 +1,15 @@
 package model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 public class Resume implements Comparable<Resume> {
     private final String uuid;
     private final String fullName;

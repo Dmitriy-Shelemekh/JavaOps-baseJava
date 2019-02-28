@@ -1,10 +1,13 @@
 package model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Objects;
 
-@Data
+
+@Getter
+@Setter
 public class Link {
     private final String name;
     private final String url;
