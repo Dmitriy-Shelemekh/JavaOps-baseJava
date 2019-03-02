@@ -1,5 +1,6 @@
 package storage;
 
+import data.TestData;
 import exception.StorageExistException;
 import exception.StorageNotExistException;
 import model.Resume;
@@ -24,11 +25,8 @@ public abstract class AbstractStorageTest {
 
     private static final Resume RESUME_1 = TestData.createResume(UUID_1, "Resume-1");
     private static final Resume RESUME_2 = TestData.createResume(UUID_2, "Resume-2");
-    ;
     private static final Resume RESUME_3 = TestData.createResume(UUID_3, "Resume-3");
-    ;
     private static final Resume RESUME_4 = TestData.createResume(UUID_4, "Resume-4");
-    ;
 
     AbstractStorageTest(Storage storage) {
         this.storage = storage;

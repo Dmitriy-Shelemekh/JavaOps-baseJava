@@ -1,4 +1,4 @@
-package storage;
+package data;
 
 import model.*;
 import utils.Period;
