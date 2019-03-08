@@ -14,4 +14,9 @@ public class Period {
         this.startDate = startDate;
         this.endDate = endDate;
     }
+
+    public Period(LocalDate startDate) {
+        this.startDate = startDate;
+        endDate = LocalDate.now();
+    }
 }
