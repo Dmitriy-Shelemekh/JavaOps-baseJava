@@ -1,6 +1,7 @@
 package data;
 
 import model.*;
+import model.OrganizationSection.Component;
 import utils.Period;
 
 import java.time.LocalDate;
@@ -64,21 +65,25 @@ public class TestData {
     }
 
     private static Organization createOrganization(String name, String url) {
-        return new Organization(
-                new Link(name, url),
-                new ArrayList<>(Arrays.asList(
-                        createOrganizationContent(new Period(
-                                LocalDate.of(2011, 10, 1),
-                                LocalDate.of(2012, 10, 1))),
-                        createOrganizationContent(new Period(
-                                LocalDate.of(2011, 10, 1),
-                                LocalDate.of(2012, 10, 1))))));
+
+        Period period = new Period(
+                LocalDate.of(2011, 10, 1),
+                LocalDate.of(2012, 10, 1));
+
+        Link link = new Link(name, url);
+
+        List<Component> components = new ArrayList<>(
+                Arrays.asList(
+                        createComponent(period),
+                        createComponent(period)));
+
+        return new Organization(link, components);
     }
 
-    private static OrganizationContent createOrganizationContent(Period period) {
-        return new OrganizationContent(
-                period,
-                "Заголовок внутреннего блока 'Организация'",
-                "Описание внутреннего блока 'Организация'");
+    private static Component createComponent(Period period) {
+        String title = "Заголовок внутреннего блока 'Организация'";
+        String description = "Описание внутреннего блока 'Организация'";
+
+        return new Component(period, title, description);
     }
 }
