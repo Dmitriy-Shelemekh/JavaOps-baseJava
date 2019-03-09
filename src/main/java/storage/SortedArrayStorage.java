@@ -16,7 +16,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     public void insertElement(Resume resume, int index) {
-        int inputIndex = Math.abs(index) - 1; //можно проще: -index - 1, но мне мой вариант больше нравится :)
+        int inputIndex = Math.abs(index) - 1;
         System.arraycopy(storage, inputIndex, storage, inputIndex + 1, size - inputIndex);
         storage[inputIndex] = resume;
     }
