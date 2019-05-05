@@ -1,4 +1,5 @@
 import model.Resume;
+import org.apache.commons.lang3.StringUtils;
 import storage.ArrayStorage;
 
 import java.io.BufferedReader;
@@ -21,16 +22,16 @@ public class MainArray {
                 continue;
             }
 
-            String param_1 = null;
-            String param_2 = null;
+            String uuid = StringUtils.EMPTY;
+            String fullName = StringUtils.EMPTY;
 
             if (params.length == 2) {
-                param_2 = params[1].intern();
+                fullName = params[1].intern();
             }
 
             if (params.length == 3) {
-                param_1 = params[1].intern();
-                param_2 = params[2].intern();
+                uuid = params[1].intern();
+                fullName = params[2].intern();
             }
 
             switch (params[0]) {
@@ -41,20 +42,20 @@ public class MainArray {
                     System.out.println(ARRAY_STORAGE.getSize());
                     break;
                 case "save":
-                    if (param_1 == null) {
-                        resume = new Resume(param_2);
+                    if (StringUtils.isEmpty(uuid)) {
+                        resume = new Resume(fullName);
                     } else {
-                        resume = new Resume(param_1, param_2);
+                        resume = new Resume(uuid, fullName);
                     }
                     ARRAY_STORAGE.save(resume);
                     printAll();
                     break;
                 case "delete":
-                    ARRAY_STORAGE.delete(param_2);
+                    ARRAY_STORAGE.delete(fullName);
                     printAll();
                     break;
                 case "get":
-                    System.out.println(ARRAY_STORAGE.getResume(param_2));
+                    System.out.println(ARRAY_STORAGE.getResume(fullName));
                     break;
                 case "clear":
                     ARRAY_STORAGE.clear();
