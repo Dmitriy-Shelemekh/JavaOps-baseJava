@@ -1,10 +1,11 @@
 import model.Resume;
-import org.apache.commons.lang3.StringUtils;
 import storage.ArrayStorage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import static org.apache.commons.lang3.StringUtils.*;
 
 public class MainArray {
     private final static ArrayStorage ARRAY_STORAGE = new ArrayStorage();
@@ -15,15 +16,15 @@ public class MainArray {
 
         while (true) {
             System.out.print("Введите одну из команд - (list | save (Uuid + Full_Name / Full_Name) | delete (Uuid) | get(Uuid) | clear | exit): ");
-            String[] params = reader.readLine().trim().toLowerCase().split(" ");
+            String[] params = reader.readLine().trim().toLowerCase().split(SPACE);
 
             if (params.length < 1 || params.length > 3) {
                 System.out.println("Неверная команда.");
                 continue;
             }
 
-            String uuid = StringUtils.EMPTY;
-            String fullName = StringUtils.EMPTY;
+            String uuid = EMPTY;
+            String fullName = EMPTY;
 
             if (params.length == 2) {
                 fullName = params[1].intern();
@@ -42,7 +43,7 @@ public class MainArray {
                     System.out.println(ARRAY_STORAGE.getSize());
                     break;
                 case "save":
-                    if (StringUtils.isEmpty(uuid)) {
+                    if (isEmpty(uuid)) {
                         resume = new Resume(fullName);
                     } else {
                         resume = new Resume(uuid, fullName);
